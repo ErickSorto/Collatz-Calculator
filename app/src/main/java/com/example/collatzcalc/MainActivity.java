@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     ArrayList<Long> listCollatzIterations = new ArrayList<Long>();
+    ArrayList<Long> listPrime = new ArrayList<Long>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<Long> list2 = new ArrayList<Long>();
+
 
     }
 
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             mRecyclerView.setHasFixedSize(false);
             mLayoutManager = new LinearLayoutManager(this);
-            mAdapter = new CollatzAdapter(listCollatzIterations);
+            collatzPrime(listPrime);
+            mAdapter = new CollatzAdapter(listCollatzIterations, listPrime);
             mRecyclerView.setLayoutManager(mLayoutManager);
             mRecyclerView.setAdapter(mAdapter);
         }
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<Long> collatzPrime(ArrayList<Long> list2) {
+    public void collatzPrime(ArrayList<Long> list2) {
         temp = collatzNum;
 
 
@@ -115,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        return list2;
+        listPrime = list2;
 
     }
 
