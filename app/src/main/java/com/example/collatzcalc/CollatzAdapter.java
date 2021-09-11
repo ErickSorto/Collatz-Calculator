@@ -8,16 +8,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class CollatzAdapter extends RecyclerView.Adapter<CollatzAdapter.ViewHolder> {
 
-    ArrayList<Long> list;
+    ArrayList<BigInteger> list;
     ArrayList<Long> primeList;
 
-    public CollatzAdapter(ArrayList<Long> list, ArrayList<Long> primeList) {
+    public CollatzAdapter(ArrayList<BigInteger> list, ArrayList<Long> primeList) {
         this.list = list;
         this.primeList = primeList;
+    }
+    public CollatzAdapter(ArrayList<BigInteger> list) {
+        this.list = list;
     }
 
     @NonNull
@@ -34,12 +38,12 @@ public class CollatzAdapter extends RecyclerView.Adapter<CollatzAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull CollatzAdapter.ViewHolder holder, int position) {
         holder.mNumber.setText(position + ": " + list.get(position).toString());
-        if(position < primeList.size()) {
+        /*if(position < primeList.size()) {
             holder.mPrime.setText(position + ": " + primeList.get(position).toString());
         }
         else{
             holder.mPrime.setText("");
-        }
+        }*/
     }
 
     @Override
@@ -56,7 +60,7 @@ public class CollatzAdapter extends RecyclerView.Adapter<CollatzAdapter.ViewHold
             super(itemView);
 
             mNumber = itemView.findViewById(R.id.iteration_num);
-            mPrime = itemView.findViewById(R.id.iteration_prime);
+            //mPrime = itemView.findViewById(R.id.iteration_prime);
         }
     }
 }
