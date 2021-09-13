@@ -18,14 +18,11 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    int input, iterationTotal, iterationMax;
-    private long temp;
     private BigInteger collatzNum;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
-    ArrayList<Long> listCollatzIterations = new ArrayList<Long>();
-    ArrayList<Long> listPrime = new ArrayList<Long>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -60,11 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void calculate(View view) {
         TextView calc = (TextView) findViewById(R.id.chicken);
-        EditText inputNum = (EditText) findViewById(R.id.input_edit_text);
 
         collatzNum = getCollatz();
         CollatzCalculator collatz = new CollatzCalculator(new BigInteger(collatzNum.toString()));
-        ArrayList<BigInteger> list = collatz.bigIntList();
+        ArrayList<BigInteger> collatzList = collatz.createCollatzList();
 
         if (collatzNum.equals(new BigInteger("0"))) {
             calc.setText("Enter Valid Number");
@@ -76,9 +72,8 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             mRecyclerView.setHasFixedSize(false);
             mLayoutManager = new LinearLayoutManager(this);
-            //collatzPrime(listPrime);
 
-            mAdapter = new CollatzAdapter(list);
+            mAdapter = new CollatzAdapter(collatzList);
             mRecyclerView.setLayoutManager(mLayoutManager);
             mRecyclerView.setAdapter(mAdapter);
         }

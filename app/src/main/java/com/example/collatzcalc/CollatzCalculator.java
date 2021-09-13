@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class CollatzCalculator {
 private BigInteger numEntered;
-private int iterationTotal = 0;
+private BigInteger biggestInt = new BigInteger("0");
+private ArrayList<BigInteger> collatzList;
 
 
     public CollatzCalculator(BigInteger numEntered) {
@@ -18,10 +19,10 @@ private int iterationTotal = 0;
 
 
 
-    public ArrayList<BigInteger> bigIntList(){
-        ArrayList<BigInteger> bigIntList= new ArrayList<BigInteger>();
 
-        bigIntList.add(numEntered);
+    public ArrayList<BigInteger> createCollatzList(){
+
+        collatzList.add(numEntered);
         while (!numEntered.equals(new BigInteger("1"))) {
 
             if (isOdd(numEntered)) {
@@ -30,14 +31,36 @@ private int iterationTotal = 0;
             } else {
                 numEntered = numEntered.divide(new BigInteger("2"));
             }
-            bigIntList.add(numEntered);
+            collatzList.add(numEntered);
         }
-        iterationTotal = bigIntList.size();
-        return bigIntList;
+        return collatzList;
+    }
+
+    public ArrayList<BigInteger> getCollatzList() {
+        return collatzList;
+    }
+
+    public BigInteger getBiggestInt() {
+
+
+
+
+
+
+            for (BigInteger integer : collatzList) {
+                int res = integer.compareTo(biggestInt);
+                if( res == 1 ){
+                    biggestInt = integer;
+                }
+            }
+
+
+        return biggestInt;
     }
 
     public int getIterationTotal() {
-        return iterationTotal;
+        int iterationTotal = 0;
+        return iterationTotal = collatzList.size();
     }
 
     public BigInteger getNumEntered() {
