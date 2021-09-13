@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class CollatzCalculator {
 private BigInteger numEntered;
 private BigInteger biggestInt = new BigInteger("0");
-private ArrayList<BigInteger> collatzList;
+private ArrayList<BigInteger> collatzList = new ArrayList<BigInteger>();
 
 
     public CollatzCalculator(BigInteger numEntered) {
