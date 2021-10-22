@@ -3,8 +3,10 @@ package com.example.collatzcalc;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view_tag, new HomeFragment()).commit();
+
+
 
     }
 
@@ -59,15 +67,17 @@ public class MainActivity extends AppCompatActivity {
         TextView calc = (TextView) findViewById(R.id.chicken);
 
         collatzNum = getCollatz();
-        CollatzCalculator collatz = new CollatzCalculator(new BigInteger(collatzNum.toString()));
-        ArrayList<BigInteger> collatzList = collatz.createCollatzList();
+
 
         if (collatzNum.equals(new BigInteger("0"))) {
             calc.setText("Enter Valid Number");
         } else {
+            CollatzCalculator collatz = new CollatzCalculator(new BigInteger(collatzNum.toString()));
+            ArrayList<BigInteger> collatzList = collatz.createCollatzList();
             String display = "Total iterations: " + collatz.getIterationTotal();
             calc.setText(display);
-
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+            tabLayout.setVisibility(tabLayout.VISIBLE);
 
             mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             mRecyclerView.setHasFixedSize(false);
@@ -83,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     public BigInteger getCollatz() {
 
         EditText inputNum = (EditText) findViewById(R.id.input_edit_text);
-        if (inputNum.getText().toString().equals("")) {
+        if (inputNum.getText().toString().equals("") || inputNum.getText().toString().equals("0")||inputNum.getText().toString().equals("1")) {
             return new BigInteger("0");
         } else {
             String value = inputNum.getText().toString();
@@ -92,71 +102,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-   /* public boolean isEven() {
-        return temp % 2 == 0;
-    }
-
-    public int sequenceAmount() {
-        ArrayList<Long> list = new ArrayList<Long>();
-        return collatzList(list).size() - 1;
-    }*/
-
-    /*public ArrayList<Long> collatzList(ArrayList<Long> list) {
-        temp = collatzNum;
-
-        list.add(temp);
-        while (temp != 1) {
-
-            if (isEven()) {
-
-                temp = temp / 2;
-            } else {
-
-                temp = temp * 3 + 1;
-            }
-            list.add(temp);
-        }
-        listCollatzIterations = list;
-        return list;
-
-    }*/
-
-    /*public void collatzPrime(ArrayList<Long> list2) {
-        temp = collatzNum;
-
-
-        while (temp != 1) {
-
-            if (isEven()) {
-
-                temp = temp / 2;
-            } else {
-                String s = String.valueOf(temp);
-
-                if (temp % 5 != 0) {
-                    list2.add(temp);
-                }
-
-                temp = temp * 3 + 1;
-
-            }
-
-        }
-
-        listPrime = list2;
-
-    }*/
-
-   /* public long highestPrime() {
-        long max = 0;
-
-        ArrayList<Long> list = new ArrayList<Long>();
-        collatzList(list);
-
-        for (int i = 0; i < list.size(); i++) {
-
-        }
-
-        return max;
-    }*/
 }

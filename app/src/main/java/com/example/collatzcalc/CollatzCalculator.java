@@ -60,7 +60,7 @@ private ArrayList<BigInteger> collatzList = new ArrayList<BigInteger>();
 
     public int getIterationTotal() {
         int iterationTotal = 0;
-        return iterationTotal = collatzList.size();
+        return iterationTotal = collatzList.size() - 1;
     }
 
     public BigInteger getNumEntered() {

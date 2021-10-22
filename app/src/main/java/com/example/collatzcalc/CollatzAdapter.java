@@ -38,13 +38,8 @@ public class CollatzAdapter extends RecyclerView.Adapter<CollatzAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull CollatzAdapter.ViewHolder holder, int position) {
         holder.mIterationPosition.setText((position + ":"));
-        holder.mNumber.setText(list.get(position).toString() + "\n");
-        /*if(position < primeList.size()) {
-            holder.mPrime.setText(position + ": " + primeList.get(position).toString());
-        }
-        else{
-            holder.mPrime.setText("");
-        }*/
+        holder.mNumber.setText(list.get(position).toString());
+
     }
 
     @Override
