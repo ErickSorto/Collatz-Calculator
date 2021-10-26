@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -37,6 +39,7 @@ public class CollatzAdapter extends RecyclerView.Adapter<CollatzAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CollatzAdapter.ViewHolder holder, int position) {
+
         holder.mIterationPosition.setText((position + ":"));
         holder.mNumber.setText(list.get(position).toString());
 

@@ -1,12 +1,22 @@
 package com.example.collatzcalc;
 
+import android.app.FragmentManager;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,8 +34,11 @@ public class EvenFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private View evenFragment;
+
     public EvenFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -37,11 +50,10 @@ public class EvenFragment extends Fragment {
      * @return A new instance of fragment EvenFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EvenFragment newInstance(String param1, String param2) {
+    public static EvenFragment newInstance() {
         EvenFragment fragment = new EvenFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,6 +71,15 @@ public class EvenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_even, container, false);
+        evenFragment = inflater.inflate(R.layout.fragment_even, container, false);
+
+
+
+
+        Log.v("chickemn","It works");
+        return evenFragment;
     }
+
+
+
 }
