@@ -70,7 +70,7 @@ public class EvenFragment extends Fragment {
 
 
         collatzViewModel.getCollatz().observe(getViewLifecycleOwner(),(list)->{
-            mAdapter = new CollatzAdapter(list);
+            mAdapter.setList(list);
             mAdapter.notifyDataSetChanged();
 
         });

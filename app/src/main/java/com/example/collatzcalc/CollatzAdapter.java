@@ -66,5 +66,10 @@ public class CollatzAdapter extends RecyclerView.Adapter<CollatzAdapter.ViewHold
             mIterationPosition = itemView.findViewById(R.id.iteration_position);
             //mPrime = itemView.findViewById(R.id.iteration_prime);
         }
+
+    }
+
+    public void setList(ArrayList<BigInteger> list) {
+        this.list = list;
     }
 }
