@@ -7,7 +7,9 @@
 
     android:orientation="vertical"
     tools:context=".MainActivity">
+
     <TextView
+        android:id="@+id/title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -40,13 +42,14 @@
                 android:layout_marginLeft="8dp"
                 android:tooltipText="hello"
                 />
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
                 android:src="@drawable/tooltip"
                 android:tooltipText="f(n)={n/2 if n is even \n
-         3n+1 if n is odd"
-                android:layout_alignParentEnd="true"/>
+         3n+1 if n is odd" />
         </RelativeLayout>
 
 
@@ -64,16 +67,70 @@
 
 
 
-    <TextView
-        android:id="@+id/numDisplay"
-        android:layout_width="wrap_content"
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text=""
-        android:textSize="32sp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        />
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/flip_image_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/ic_baseline_swap_vert_24"
+
+
+            android:tooltipText="Flip List" />
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/numDisplayTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Total Iteration"
+                android:textSize="16sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+
+                />
+            <TextView
+                android:id="@+id/numDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="23423"
+                android:textSize="32sp" />
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/sort_image_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="32dp"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/ic_baseline_sort_24"
+            android:tooltipText="Sort List" />
+
+
+    </RelativeLayout>
 
 
     <com.google.android.material.tabs.TabLayout
@@ -97,6 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Odd" />
+
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
@@ -104,6 +162,8 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:visibility="visible"/>
+
+
 
 
 

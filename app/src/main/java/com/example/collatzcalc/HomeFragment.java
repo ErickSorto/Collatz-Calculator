@@ -7,16 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -38,7 +36,8 @@ public class HomeFragment extends Fragment {
     ViewPager2 pager2;
     FragmentAdapterRecycler adapter;
 
-    private TextView calc;
+    private TextView numDisplay;
+    private TextView numDisplayTitle;
     CollatzViewModel collatzViewModel;
 
     @Nullable
@@ -52,22 +51,40 @@ public class HomeFragment extends Fragment {
         tabLayout = myFragment.findViewById(R.id.tab_layout);
         pager2 = myFragment.findViewById(R.id.view_pager2);
         Button calculate = myFragment.findViewById(R.id.calculate_button);
+        ImageButton flip = myFragment.findViewById(R.id.flip_image_button);
+        ImageButton sort = myFragment.findViewById(R.id.sort_image_button);
 
         FragmentManager fm = getFragmentManager();
         adapter = new FragmentAdapterRecycler(fm, getLifecycle());
         pager2.setAdapter(adapter);
+
+        sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        flip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                TextView calc = (TextView) myFragment.findViewById(R.id.numDisplay);
-
+                numDisplay = (TextView) myFragment.findViewById(R.id.numDisplay);
+                numDisplayTitle = (TextView) myFragment.findViewById(R.id.numDisplayTitle);
+                TextView title = (TextView) myFragment.findViewById(R.id.title_text_view);
                 collatzNum = getCollatz();
 
                 if (collatzNum.equals(new BigInteger("0"))) {
-                    calc.setText("Enter Valid Number");
+                    numDisplayTitle.setVisibility(View.GONE);
+                    numDisplay.setText("Invalid");
                 } else {
                     tabLoaded1 = false;
                     tabLoaded2 = false;
@@ -77,6 +94,8 @@ public class HomeFragment extends Fragment {
 
                     tabLayout.setVisibility(View.VISIBLE);
                     pager2.setVisibility(View.VISIBLE);
+                    numDisplayTitle.setVisibility(View.VISIBLE);
+                    title.setVisibility(View.GONE);
                     FragmentManager fm = getFragmentManager();
                     adapter = new FragmentAdapterRecycler(fm, getLifecycle());
                     pager2.setAdapter(adapter);
@@ -90,8 +109,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
 
-                calc = (TextView) myFragment.findViewById(R.id.numDisplay);
-                fillFragment(pager2.getCurrentItem());
+                numDisplay = (TextView) myFragment.findViewById(R.id.numDisplay);
+                fillFragment(position);
                 tabLayout.selectTab(tabLayout.getTabAt(position));
             }
         });
@@ -132,30 +151,38 @@ public class HomeFragment extends Fragment {
     public void fillFragment(int position) {
 
         if (position == 0 && isChosen) {
-            String iterations = "Total Iterations: " + collatz.getIterationTotal();
-            calc.setText(iterations);
+            String iterations = String.valueOf(collatz.getIterationTotal());
+            String numTitle = "Total Iteration";
+            numDisplay.setText(iterations);
+            numDisplayTitle.setText(numTitle);
+
             if (tabLoaded1 == false) {
                 collatzViewModel.getCollatz().setValue(collatz.getCollatzList());
-                Log.v("sd",collatz.getCollatzList().toString());
+               Log.v("tag","Im heree");
                 tabLoaded1 = true;
             }
         }
         if (position == 1 && isChosen) {
-            String evenTotal = "Total Even: " + collatz.getEvenTotal();
-            calc.setText(evenTotal);
+            String evenTotal = String.valueOf(collatz.getEvenTotal());
+            String numTitle = "Total Even";
+            numDisplay.setText(evenTotal);
+            numDisplayTitle.setText(numTitle);
 
             if (tabLoaded2 == false) {
 
-                collatzViewModel.getCollatz().setValue(collatz.getEvenList());
+                collatzViewModel.getCollatzEven().setValue(collatz.getEvenList());
                 tabLoaded2 = true;
             }
 
         }
         if (position == 2 && isChosen) {
-            String oddTotal = "Total Odd: " + collatz.getOddTotal();
-            calc.setText(oddTotal);
+            String oddTotal = String.valueOf(collatz.getOddTotal());
+            String numTitle = "Total Odd";
+            numDisplay.setText(oddTotal);
+            numDisplayTitle.setText(numTitle);
+
             if (tabLoaded3 == false) {
-                collatzViewModel.getCollatz().setValue(collatz.getOddList());
+                collatzViewModel.getCollatzOdd().setValue(collatz.getOddList());
                 tabLoaded3 = true;
             }
 

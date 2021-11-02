@@ -69,7 +69,7 @@ public class EvenFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        collatzViewModel.getCollatz().observe(getViewLifecycleOwner(),(list)->{
+        collatzViewModel.getCollatzEven().observe(getViewLifecycleOwner(),(list)->{
             mAdapter.setList(list);
             mAdapter.notifyDataSetChanged();
 

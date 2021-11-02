@@ -2,6 +2,7 @@ package com.example.collatzcalc;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CollatzCalculator {
 private BigInteger numEntered;
@@ -9,6 +10,8 @@ private BigInteger biggestInt = new BigInteger("0");
 private ArrayList<BigInteger> collatzList = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> evenList = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> oddList = new ArrayList<BigInteger>();
+private ArrayList<BigInteger> reverseList = new ArrayList<BigInteger>();
+private ArrayList<BigInteger> sortAndRevert = new ArrayList<BigInteger>();
 
 
     public CollatzCalculator(BigInteger numEntered) {
@@ -80,6 +83,16 @@ private ArrayList<BigInteger> oddList = new ArrayList<BigInteger>();
     public int getOddTotal(){
         int odd = 0;
         return odd = oddList.size();
+    }
+
+    public ArrayList<BigInteger> getReverseList(ArrayList<BigInteger> listToBeReversed){
+        Collections.reverse(listToBeReversed);
+        return listToBeReversed;
+    }
+
+    public ArrayList<BigInteger> getListSortedOrReverted(ArrayList<BigInteger> listSortedOrReverted){
+        Collections.sort(listSortedOrReverted);
+        return listSortedOrReverted;
     }
 
 
