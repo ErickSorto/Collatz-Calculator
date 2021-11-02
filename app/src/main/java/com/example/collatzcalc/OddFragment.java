@@ -21,7 +21,7 @@ public class OddFragment extends Fragment {
     CollatzViewModel collatzViewModel;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView.Adapter mAdapter;
+    private CollatzAdapter mAdapter;
 
 
     // TODO: Rename and change types of parameters
@@ -62,7 +62,7 @@ public class OddFragment extends Fragment {
 
 
         collatzViewModel.getCollatz().observe(getViewLifecycleOwner(),(list)->{
-            mAdapter = new CollatzAdapter(list);
+            mAdapter.setList(list);
             mAdapter.notifyDataSetChanged();
         });
 

@@ -32,7 +32,7 @@ public class IterationFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView.Adapter mAdapter;
+    private CollatzAdapter mAdapter;
 
 
     // TODO: Rename and change types of parameters
@@ -84,7 +84,7 @@ public class IterationFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         collatzViewModel.getCollatz().observe(getViewLifecycleOwner(),(list)->{
-            mAdapter = new CollatzAdapter(list);
+            mAdapter.setList(list);
             mAdapter.notifyDataSetChanged();
             Log.v("InOnCreate", list.toString());
         });

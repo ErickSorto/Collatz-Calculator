@@ -29,7 +29,7 @@ public class EvenFragment extends Fragment {
     CollatzViewModel collatzViewModel;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView.Adapter mAdapter;
+    private CollatzAdapter mAdapter;
 
 
 
