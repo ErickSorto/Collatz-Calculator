@@ -76,7 +76,7 @@
 
 
     <TextView
-        android:id="@+id/chicken"
+        android:id="@+id/numDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""

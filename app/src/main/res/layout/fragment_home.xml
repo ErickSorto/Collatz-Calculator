@@ -16,22 +16,9 @@
         android:layout_marginTop="8dp"
         android:maxLines="1"
         android:text="Collatz Conjecture"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="16dp"
-        android:text="If odd: 3n + 1"
-        android:textSize="10pt"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="16dp"
-        android:text="If even: n/2"
-        android:textSize="10pt"/>
+
     <LinearLayout
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -70,13 +57,15 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Compute"
+            android:textColor="@color/white"
+
             android:layout_marginRight="8dp"/>
     </LinearLayout>
 
 
 
     <TextView
-        android:id="@+id/chicken"
+        android:id="@+id/numDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

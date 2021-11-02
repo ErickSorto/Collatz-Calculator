@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +18,10 @@ import java.util.ArrayList;
 
 
 public class OddFragment extends Fragment {
-
+    CollatzViewModel collatzViewModel;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.Adapter mAdapter;
 
 
     // TODO: Rename and change types of parameters
@@ -47,7 +52,21 @@ public class OddFragment extends Fragment {
 
 
         oddFragment = inflater.inflate(R.layout.fragment_odd, container, false);
+        collatzViewModel = new ViewModelProvider(getActivity()).get(CollatzViewModel.class);
 
+        mRecyclerView = (RecyclerView) oddFragment.findViewById(R.id.recycler_view_odd);
+        mRecyclerView.setHasFixedSize(false);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new CollatzAdapter();
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+        collatzViewModel.getCollatz().observe(getViewLifecycleOwner(),(list)->{
+            mAdapter = new CollatzAdapter(list);
+            mAdapter.notifyDataSetChanged();
+        });
+
+        mRecyclerView.setAdapter(mAdapter);
         return oddFragment;
     }
 

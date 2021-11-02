@@ -14,10 +14,12 @@ import java.math.BigInteger;
 
 public class FragmentAdapterRecycler extends FragmentStateAdapter {
 
-    private View myFragment;
+
+
 
     public FragmentAdapterRecycler(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
+
     }
 
     @NonNull
@@ -30,7 +32,9 @@ public class FragmentAdapterRecycler extends FragmentStateAdapter {
                 return new OddFragment();
 
         }
+
         return new IterationFragment();
+
     }
 
     @Override

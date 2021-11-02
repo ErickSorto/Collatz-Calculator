@@ -12,11 +12,15 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CollatzAdapter extends RecyclerView.Adapter<CollatzAdapter.ViewHolder> {
 
-    ArrayList<BigInteger> list;
-    ArrayList<Long> primeList;
+    ArrayList<BigInteger> list = new ArrayList<BigInteger>();
+    List<Long> primeList;
+
+    public CollatzAdapter() {
+    }
 
     public CollatzAdapter(ArrayList<BigInteger> list, ArrayList<Long> primeList) {
         this.list = list;

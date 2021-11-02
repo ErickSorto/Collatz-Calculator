@@ -1,12 +1,11 @@
 package com.example.collatzcalc;
 
-import android.app.FragmentManager;
-import android.content.Intent;
-import android.os.Build;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -25,14 +25,13 @@ import java.util.ArrayList;
  */
 public class EvenFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    CollatzViewModel collatzViewModel;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.Adapter mAdapter;
+
+
 
     private View evenFragment;
 
@@ -41,15 +40,7 @@ public class EvenFragment extends Fragment {
 
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EvenFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static EvenFragment newInstance() {
         EvenFragment fragment = new EvenFragment();
         Bundle args = new Bundle();
@@ -61,10 +52,7 @@ public class EvenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -72,11 +60,22 @@ public class EvenFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         evenFragment = inflater.inflate(R.layout.fragment_even, container, false);
+        collatzViewModel = new ViewModelProvider(getActivity()).get(CollatzViewModel.class);
+
+        mRecyclerView = (RecyclerView) evenFragment .findViewById(R.id.recycler_view_even);
+        mRecyclerView.setHasFixedSize(false);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new CollatzAdapter();
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
 
+        collatzViewModel.getCollatz().observe(getViewLifecycleOwner(),(list)->{
+            mAdapter = new CollatzAdapter(list);
+            mAdapter.notifyDataSetChanged();
 
+        });
 
-        Log.v("chickemn","It works");
+        mRecyclerView.setAdapter(mAdapter);
         return evenFragment;
     }
 
