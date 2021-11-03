@@ -86,7 +86,6 @@ public class IterationFragment extends Fragment {
         collatzViewModel.getCollatz().observe(getViewLifecycleOwner(),(list)->{
             mAdapter.setList(list);
             mAdapter.notifyDataSetChanged();
-            Log.v("InOnCreate", "IT WENT INNNN");
         });
         mRecyclerView.setAdapter(mAdapter);
 

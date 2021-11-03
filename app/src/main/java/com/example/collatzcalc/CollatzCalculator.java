@@ -1,17 +1,21 @@
 package com.example.collatzcalc;
 
+import android.icu.text.Transliterator;
+import android.util.Log;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class CollatzCalculator {
 private BigInteger numEntered;
-private BigInteger biggestInt = new BigInteger("0");
+private BigInteger biggestInt;
 private ArrayList<BigInteger> collatzList = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> evenList = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> oddList = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> reverseList = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> sortAndRevert = new ArrayList<BigInteger>();
+private Boolean sortSwitch = false;
 
 
     public CollatzCalculator(BigInteger numEntered) {
@@ -27,7 +31,7 @@ private ArrayList<BigInteger> sortAndRevert = new ArrayList<BigInteger>();
 
 
 
-    public ArrayList<BigInteger> createCollatzList(){
+    public void createCollatzList(){
 
         collatzList.add(numEntered);
         while (!numEntered.equals(new BigInteger("1"))) {
@@ -42,7 +46,6 @@ private ArrayList<BigInteger> sortAndRevert = new ArrayList<BigInteger>();
             }
             collatzList.add(numEntered);
         }
-        return collatzList;
     }
 
     public ArrayList<BigInteger> getCollatzList() {
@@ -57,15 +60,9 @@ private ArrayList<BigInteger> sortAndRevert = new ArrayList<BigInteger>();
         return oddList;
     }
 
-    public BigInteger getBiggestInt() {
+    public BigInteger getMax(){
 
-            for (BigInteger integer : collatzList) {
-                int res = integer.compareTo(biggestInt);
-                if( res == 1 ){
-                    biggestInt = integer;
-                }
-            }
-
+        biggestInt = Collections.max(getCollatzList());
 
         return biggestInt;
     }
@@ -90,9 +87,51 @@ private ArrayList<BigInteger> sortAndRevert = new ArrayList<BigInteger>();
         return listToBeReversed;
     }
 
-    public ArrayList<BigInteger> getListSortedOrReverted(ArrayList<BigInteger> listSortedOrReverted){
-        Collections.sort(listSortedOrReverted);
+    public ArrayList<BigInteger> getListSortedOrReverted(ArrayList<BigInteger> listSortedOrReverted, Boolean sortSwitch, int position){
+
+        if(position == 0){
+            if(sortSwitch == false){
+
+
+                Collections.sort(listSortedOrReverted);
+
+            }
+            else {
+                return getCollatzList();
+            }
+
+        }
+        else if(position == 1){
+            if(sortSwitch == false){
+
+
+                Collections.sort(listSortedOrReverted);
+
+            }
+            else {
+                return getCollatzList();
+            }
+
+        }
+        else if(position == 2){
+            if(sortSwitch == false){
+
+
+                Collections.sort(listSortedOrReverted);
+
+            }
+            else {
+                return getCollatzList();
+            }
+
+        }
+
         return listSortedOrReverted;
+
+
+
+
+
     }
 
 

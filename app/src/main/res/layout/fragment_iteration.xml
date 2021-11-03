@@ -12,7 +12,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/border">
+        android:background="@drawable/border"
+        android:scrollbars="vertical"
+        android:scrollbarSize="25dip">
     </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>
