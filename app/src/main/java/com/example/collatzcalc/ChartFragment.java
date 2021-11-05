@@ -1,48 +1,38 @@
 package com.example.collatzcalc;
 
-
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import java.math.BigInteger;
 import java.util.ArrayList;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EvenFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class EvenFragment extends Fragment {
+import java.util.Collections;
 
 
+public class ChartFragment extends Fragment {
     CollatzViewModel collatzViewModel;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private CollatzAdapter mAdapter;
+    private ChartAdapter mAdapter;
 
 
 
-    private View evenFragment;
+    private View chartFragment;
 
-    public EvenFragment() {
+    public ChartFragment() {
         // Required empty public constructor
 
     }
 
 
-    public static EvenFragment newInstance() {
-        EvenFragment fragment = new EvenFragment();
+    public static ChartFragment newInstance() {
+        ChartFragment fragment = new ChartFragment();
         Bundle args = new Bundle();
 
         fragment.setArguments(args);
@@ -59,26 +49,29 @@ public class EvenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        evenFragment = inflater.inflate(R.layout.fragment_even, container, false);
+        chartFragment = inflater.inflate(R.layout.fragment_chart, container, false);
         collatzViewModel = new ViewModelProvider(getActivity()).get(CollatzViewModel.class);
 
-        mRecyclerView = (RecyclerView) evenFragment.findViewById(R.id.recycler_view_even);
+        mRecyclerView = (RecyclerView) chartFragment.findViewById(R.id.recycler_view_chart);
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new CollatzAdapter();
+        mAdapter = new ChartAdapter();
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-
-        collatzViewModel.getCollatzEven().observe(getViewLifecycleOwner(),(list)->{
+        collatzViewModel.getChartItems().observe(getViewLifecycleOwner(),(list)->{
             mAdapter.setList(list);
             mAdapter.notifyDataSetChanged();
+            Log.v("list", "" + list.toString());
 
         });
 
-        mRecyclerView.setAdapter(mAdapter);
-        return evenFragment;
+        return chartFragment;
     }
 
 
 
+
+
+
 }
+

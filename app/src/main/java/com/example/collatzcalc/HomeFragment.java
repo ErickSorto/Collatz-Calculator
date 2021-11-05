@@ -1,6 +1,7 @@
 package com.example.collatzcalc;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,12 +34,15 @@ public class HomeFragment extends Fragment {
     boolean tabLoaded1 = false;
     boolean tabLoaded2 = false;
     boolean tabLoaded3 = false;
+    boolean tabloaded4 = false;
     boolean sortSwitchTab1 = false;
     boolean sortSwitchTab2 = false;
     boolean sortSwitchTab3 = false;
     boolean reverseSwitchTab1 = false;
     boolean reverseSwitchTab2 = false;
     boolean reverseSwitchTab3 = false;
+    boolean finishedCal = false;
+
 
 
 
@@ -51,6 +55,8 @@ public class HomeFragment extends Fragment {
     private TextView numDisplayTitle;
     private SwitchCompat isSorted;
     private SwitchCompat isRevered;
+
+    private Handler homeHandler = new Handler();
 
     CollatzViewModel collatzViewModel;
 
@@ -89,7 +95,7 @@ public class HomeFragment extends Fragment {
         isRevered.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                fillReversedFragment(pager2.getCurrentItem(), collatz, isChecked);
             }
         });
 
@@ -133,16 +139,22 @@ public class HomeFragment extends Fragment {
                     reverseSwitchTab1 = false;
                     reverseSwitchTab2 = false;
                     reverseSwitchTab3 = false;
+                    finishedCal = false;
                     collatz = new CollatzCalculator(new BigInteger(collatzNum.toString()));
+
                     collatz.createCollatzList();
-
-
 
                     tabLayout.setVisibility(View.VISIBLE);
                     pager2.setVisibility(View.VISIBLE);
 
                     displayButtonTotal.setVisibility(View.VISIBLE);
                     title.setVisibility(View.GONE);
+
+
+
+
+
+
                     FragmentManager fm = getFragmentManager();
                     adapter = new FragmentAdapterRecycler(fm, getLifecycle());
                     pager2.setAdapter(adapter);
@@ -190,7 +202,7 @@ public class HomeFragment extends Fragment {
     public BigInteger getCollatz() {
 
         EditText inputNum = (EditText) myFragment.findViewById(R.id.input_edit_text);
-        if (inputNum.getText().toString().equals("") || inputNum.getText().toString().equals("0") || inputNum.getText().toString().equals("1")) {
+        if (inputNum.getText().toString().equals("") || inputNum.getText().toString().equals("0")) {
             isChosen = false;
             return new BigInteger("0");
         } else {
@@ -203,6 +215,7 @@ public class HomeFragment extends Fragment {
 
 
     public void fillFragment(int position, CollatzCalculator collatz) {
+
 
         if (position == 0 && tabLoaded1 == false) {
             collatzViewModel.getCollatz().setValue(collatz.getCollatzList());
@@ -217,6 +230,11 @@ public class HomeFragment extends Fragment {
         else if (position == 2 && tabLoaded3 == false) {
             collatzViewModel.getCollatzOdd().setValue(collatz.getOddList());
             tabLoaded3 = true;
+        }
+        else if(position == 3 && tabloaded4 == false){
+            collatzViewModel.getChartItems().setValue(collatz.getChartArray());
+            Log.v("IT WENT IN", "ITS HEREEE");
+            tabloaded4 = true;
         }
 
     }
@@ -288,26 +306,74 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public void fillReversedFragment(int position, CollatzCalculator collatz){
-        if(position == 0){
-            if(sortSwitchTab1 == false){
-                collatzViewModel.getCollatz().setValue(collatz.getReverseList(collatz.getCollatzList()));
+    public void fillReversedFragment(int position, CollatzCalculator collatz, Boolean isChecked){
+
+
+
+
+        if(isChecked){
+            if(position == 0){
+                reverseSwitchTab1 = true;
+                if(sortSwitchTab1){
+                    collatzViewModel.getCollatz().setValue(collatz.getReverseList((ArrayList<BigInteger>) collatz.getSortedIterations().clone()));
+                }
+                else {
+                    collatzViewModel.getCollatz().setValue(collatz.getReversedIterations());
+                }
+
             }
+            else if(position == 1){
+                reverseSwitchTab2 = true;
+                if(sortSwitchTab2){
+                    collatzViewModel.getCollatzEven().setValue(collatz.getReverseList((ArrayList<BigInteger>) collatz.getSortedEven().clone()));
+                }
+                else {
+                    collatzViewModel.getCollatzEven().setValue(collatz.getReversedEven());
+                }
 
-        }
-        else if(position == 1){
-            if(sortSwitchTab2 == false){
-                collatzViewModel.getCollatzEven().setValue(collatz.getReverseList(collatz.getEvenList()));
             }
+            else if(position == 2){
+                reverseSwitchTab3 = true;
+                if(sortSwitchTab3){
+                    collatzViewModel.getCollatzOdd().setValue(collatz.getReverseList((ArrayList<BigInteger>) collatz.getSortedOdd().clone()));
+                }
+                else {
+                    collatzViewModel.getCollatzOdd().setValue(collatz.getReversedOdd());
+                }
 
-        }
-        else if(position == 2){
-            if(sortSwitchTab3 == false){
-                collatzViewModel.getCollatzOdd().setValue(collatz.getReverseList(collatz.getOddList()));
             }
-
-
         }
+        else{
+            if(position == 0){
+                reverseSwitchTab1 = false;
+                if(sortSwitchTab1){
+                    collatzViewModel.getCollatz().setValue(collatz.getSortedIterations());
+                }
+                else {
+                    collatzViewModel.getCollatz().setValue(collatz.getCollatzList());
+                }
+
+            }
+            else if(position == 1){
+                reverseSwitchTab2 = false;
+                if(sortSwitchTab2){
+                    collatzViewModel.getCollatzEven().setValue(collatz.getSortedEven());
+                }
+                else{
+                    collatzViewModel.getCollatzEven().setValue(collatz.getEvenList());
+                }
+            }
+            else if(position == 2){
+                reverseSwitchTab3 = false;
+                if(sortSwitchTab3){
+                    collatzViewModel.getCollatzOdd().setValue(collatz.getSortedOdd());
+                }
+                else {
+                    collatzViewModel.getCollatzOdd().setValue(collatz.getOddList());
+                }
+            }
+        }
+
     }
 
     public void changeDisplay(int position, CollatzCalculator collatz){
@@ -321,6 +387,9 @@ public class HomeFragment extends Fragment {
             if(isSorted.isChecked() != sortSwitchTab1){
                 isSorted.toggle();
             }
+            if(isRevered.isChecked() != reverseSwitchTab1){
+                isRevered.toggle();
+            }
         }
         else if(position == 1 && isChosen){
             String evenTotal = String.valueOf(collatz.getEvenTotal());
@@ -329,6 +398,9 @@ public class HomeFragment extends Fragment {
             numDisplayTitle.setText(numTitle);
             if(isSorted.isChecked() != sortSwitchTab2) {
                 isSorted.toggle();
+            }
+            if(isRevered.isChecked() != reverseSwitchTab2){
+                isRevered.toggle();
             }
         }
         else if(position == 2 && isChosen){
@@ -339,8 +411,13 @@ public class HomeFragment extends Fragment {
             if(isSorted.isChecked() != sortSwitchTab3){
                 isSorted.toggle();
             }
+            if(isRevered.isChecked() != reverseSwitchTab3){
+                isRevered.toggle();
+            }
         }
     }
+
+
 
     @Override
     public void onResume() {

@@ -30,6 +30,8 @@ public class FragmentAdapterRecycler extends FragmentStateAdapter {
                 return new EvenFragment();
             case 2:
                 return new OddFragment();
+            case 3:
+                return new ChartFragment();
 
         }
 
@@ -39,7 +41,7 @@ public class FragmentAdapterRecycler extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 
 

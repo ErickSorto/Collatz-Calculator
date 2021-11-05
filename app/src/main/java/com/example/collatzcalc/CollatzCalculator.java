@@ -1,15 +1,14 @@
 package com.example.collatzcalc;
 
-import android.icu.text.Transliterator;
-import android.util.Log;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class CollatzCalculator {
 private BigInteger numEntered;
-private BigInteger biggestInt;
+private BigInteger maximum;
+private double residue;
+
 private ArrayList<BigInteger> collatzList = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> evenList = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> oddList = new ArrayList<BigInteger>();
@@ -37,7 +36,7 @@ private Boolean sortSwitch = false;
 
 
     public void createCollatzList(){
-
+        BigInteger originalNum = numEntered;
         collatzList.add(numEntered);
         while (!numEntered.equals(new BigInteger("1"))) {
 
@@ -51,16 +50,27 @@ private Boolean sortSwitch = false;
             }
             collatzList.add(numEntered);
         }
-
+        oddList.add(new BigInteger("1"));
+        oddList.remove(originalNum);
+        evenList.remove(originalNum);
         setSortedIterations(sortList((ArrayList<BigInteger>) collatzList.clone()));
         setSortedEven(sortList((ArrayList<BigInteger>) evenList.clone()));
         setSortedOdd(sortList((ArrayList<BigInteger>) oddList.clone()));
         setReversedEven(getReverseList((ArrayList<BigInteger>) evenList.clone()));
         setReversedIterations(getReverseList((ArrayList<BigInteger>) collatzList.clone()));
-        setReversedOdd(getReverseList(getReverseList((ArrayList<BigInteger>) oddList.clone())));
+        setReversedOdd(getReverseList((ArrayList<BigInteger>) oddList.clone()));
 
+    }
 
+    public ArrayList<ChartItem> getChartArray(){
+        ArrayList<ChartItem> arrayChart = new ArrayList<ChartItem>();
 
+        arrayChart.add(new ChartItem("Total Iteration: ", String.valueOf(getIterationTotal())));
+        arrayChart.add(new ChartItem("Total Even: ", String.valueOf(getEvenTotal())));
+        arrayChart.add(new ChartItem("Total Odd: ", String.valueOf(getOddTotal())));
+        arrayChart.add(new ChartItem("Maximum: ", String.valueOf(getMax())));
+        arrayChart.add(new ChartItem("Residue: ", String.valueOf(getResidue())));
+        return arrayChart;
     }
 
     public ArrayList<BigInteger> getCollatzList() {
@@ -77,9 +87,12 @@ private Boolean sortSwitch = false;
 
     public BigInteger getMax(){
 
-        biggestInt = Collections.max(getCollatzList());
+        maximum = Collections.max(getCollatzList());
 
-        return biggestInt;
+        return maximum;
+    }
+    public double getResidue(){
+        return (Math.pow(2,getEvenTotal()))/ (Math.pow(3,getOddTotal()) * getIterationTotal());
     }
 
     public int getIterationTotal() {
@@ -104,6 +117,8 @@ private Boolean sortSwitch = false;
         Collections.sort(listToBeSorted);
         return listToBeSorted;
     }
+
+
 
 
 

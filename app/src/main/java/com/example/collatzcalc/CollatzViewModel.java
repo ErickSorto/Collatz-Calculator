@@ -11,6 +11,7 @@ public class CollatzViewModel extends ViewModel {
     private MutableLiveData<ArrayList<BigInteger>> collatz = new MutableLiveData();
     private MutableLiveData<ArrayList<BigInteger>> collatzEven = new MutableLiveData();
     private MutableLiveData<ArrayList<BigInteger>> collatzOdd = new MutableLiveData();
+    private MutableLiveData<ArrayList<ChartItem>> chartItems = new MutableLiveData();
 
     public MutableLiveData<ArrayList<BigInteger>> getCollatz(){
         return collatz;
@@ -20,5 +21,8 @@ public class CollatzViewModel extends ViewModel {
     }
     public MutableLiveData<ArrayList<BigInteger>> getCollatzOdd(){
         return collatzOdd;
+    }
+    public MutableLiveData<ArrayList<ChartItem>> getChartItems(){
+        return chartItems;
     }
 }
