@@ -30,18 +30,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
+
             <EditText
-                android:inputType="number"
                 android:id="@+id/input_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                android:hint="Enter Number (n)"
                 android:gravity="center"
-                android:layout_marginLeft="8dp"
-                android:tooltipText="hello"
-                />
+                android:hint="Enter Number (n)"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:tooltipText="hello" />
 
             <ImageView
                 android:layout_width="30dp"
@@ -74,39 +75,52 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/display_button_layout"
-        android:visibility="gone">
+        android:visibility="visible">
 
-        <ImageButton
-            android:id="@+id/flip_image_button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <LinearLayout
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="32dp"
-            android:backgroundTint="@color/black"
-            android:src="@drawable/ic_baseline_swap_vert_24"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
 
+            <ImageButton
+                android:id="@+id/flip_image_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/ic_baseline_swap_vert_24"
 
-            android:tooltipText="Flip List" />
+                android:tooltipText="Flip List" />
 
-
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_reverse"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:text="Reverse" />
+        </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/numDisplayTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Total Iteration"
-                android:textSize="16sp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:text="Total Iteration"
+                android:textSize="16sp"
 
                 />
+
             <TextView
                 android:id="@+id/numDisplay"
                 android:layout_width="wrap_content"
@@ -119,17 +133,33 @@
                 android:textSize="32sp" />
         </LinearLayout>
 
-
-        <ImageButton
-            android:id="@+id/sort_image_button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <LinearLayout
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
-            android:backgroundTint="@color/black"
-            android:src="@drawable/ic_baseline_sort_24"
-            android:tooltipText="Sort List" />
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/sort_image_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/ic_baseline_sort_24"
+                android:tooltipText="Sort List" />
+
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_sort"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="@+id/sort_image_button"
+                android:text="Sort" />
+        </LinearLayout>
+
 
 
     </RelativeLayout>

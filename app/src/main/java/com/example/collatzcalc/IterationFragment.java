@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -33,6 +34,7 @@ public class IterationFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private CollatzAdapter mAdapter;
+
 
 
     // TODO: Rename and change types of parameters
@@ -77,17 +79,21 @@ public class IterationFragment extends Fragment {
                              Bundle savedInstanceState) {
         iterationFragment = inflater.inflate(R.layout.fragment_iteration, container, false);
         collatzViewModel = new ViewModelProvider(getActivity()).get(CollatzViewModel.class);
+
         mRecyclerView = (RecyclerView) iterationFragment.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(getActivity());
+
         mAdapter = new CollatzAdapter();
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
         collatzViewModel.getCollatz().observe(getViewLifecycleOwner(),(list)->{
+
             mAdapter.setList(list);
             mAdapter.notifyDataSetChanged();
         });
-        mRecyclerView.setAdapter(mAdapter);
+
 
         return iterationFragment;
     }

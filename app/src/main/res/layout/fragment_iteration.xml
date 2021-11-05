@@ -15,6 +15,7 @@
         android:background="@drawable/border"
         android:scrollbars="vertical"
         android:scrollbarSize="25dip">
+
     </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

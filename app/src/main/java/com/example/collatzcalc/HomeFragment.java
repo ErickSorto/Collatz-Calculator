@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,6 +24,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomeFragment extends Fragment {
     private BigInteger collatzNum;
@@ -33,6 +36,9 @@ public class HomeFragment extends Fragment {
     boolean sortSwitchTab1 = false;
     boolean sortSwitchTab2 = false;
     boolean sortSwitchTab3 = false;
+    boolean reverseSwitchTab1 = false;
+    boolean reverseSwitchTab2 = false;
+    boolean reverseSwitchTab3 = false;
 
 
 
@@ -43,6 +49,9 @@ public class HomeFragment extends Fragment {
 
     private TextView numDisplay;
     private TextView numDisplayTitle;
+    private SwitchCompat isSorted;
+    private SwitchCompat isRevered;
+
     CollatzViewModel collatzViewModel;
 
     @Nullable
@@ -54,6 +63,9 @@ public class HomeFragment extends Fragment {
 
         tabLayout = myFragment.findViewById(R.id.tab_layout);
         pager2 = myFragment.findViewById(R.id.view_pager2);
+        isSorted = myFragment.findViewById(R.id.switch_sort);
+        isRevered = myFragment.findViewById(R.id.switch_reverse);
+
         Button calculate = myFragment.findViewById(R.id.calculate_button);
         ImageButton flip = myFragment.findViewById(R.id.flip_image_button);
         ImageButton sort = myFragment.findViewById(R.id.sort_image_button);
@@ -63,12 +75,29 @@ public class HomeFragment extends Fragment {
         adapter = new FragmentAdapterRecycler(fm, getLifecycle());
         pager2.setAdapter(adapter);
 
+        isSorted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                fillSortedFragment(pager2.getCurrentItem(), collatz, isChecked);
+
+
+
+            }
+        });
+
+        isRevered.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+
         sort.setOnClickListener(new View.OnClickListener() { //BUG: When new computation is made, all tab loaded are true so when sort button gets click all of pages get updated. WHEN BUTTON IS clicked again calcualtion are made again even if items are loaded
             @Override
             public void onClick(View v) {
 
-                fillSortedFragment(pager2.getCurrentItem(), collatz);
-
+                isSorted.toggle();
 
 
             }
@@ -77,7 +106,7 @@ public class HomeFragment extends Fragment {
         flip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fillReversedFragment(pager2.getCurrentItem(), collatz);
+                isRevered.toggle();
             }
         });
 
@@ -101,8 +130,13 @@ public class HomeFragment extends Fragment {
                     sortSwitchTab1 = false;
                     sortSwitchTab2 = false;
                     sortSwitchTab3 = false;
+                    reverseSwitchTab1 = false;
+                    reverseSwitchTab2 = false;
+                    reverseSwitchTab3 = false;
                     collatz = new CollatzCalculator(new BigInteger(collatzNum.toString()));
                     collatz.createCollatzList();
+
+
 
                     tabLayout.setVisibility(View.VISIBLE);
                     pager2.setVisibility(View.VISIBLE);
@@ -170,10 +204,6 @@ public class HomeFragment extends Fragment {
 
     public void fillFragment(int position, CollatzCalculator collatz) {
 
-
-
-
-
         if (position == 0 && tabLoaded1 == false) {
             collatzViewModel.getCollatz().setValue(collatz.getCollatzList());
 
@@ -191,46 +221,92 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public void fillSortedFragment(int position, CollatzCalculator collatz){
-        if(position ==0){
-
-            collatzViewModel.getCollatz().setValue(collatz.getListSortedOrReverted((ArrayList<BigInteger>) collatz.getCollatzList().clone(), sortSwitchTab1, position));
-            if(sortSwitchTab1 == false){
+    public void fillSortedFragment(int position, CollatzCalculator collatz, Boolean isChecked){
+        if(isChecked){
+            if(position == 0){
                 sortSwitchTab1 = true;
+                if(reverseSwitchTab1){
+                    collatzViewModel.getCollatz().setValue(collatz.getReverseList((ArrayList<BigInteger>) collatz.getSortedIterations().clone()));
+                }
+                else{
+                    collatzViewModel.getCollatz().setValue(collatz.getSortedIterations());
+                }
             }
-            else if(sortSwitchTab1){
-                sortSwitchTab1 = false;
-            }
-        }
-        else if(position == 1){
-            collatzViewModel.getCollatzEven().setValue(collatz.getListSortedOrReverted((ArrayList<BigInteger>) collatz.getEvenList().clone(), sortSwitchTab2, position));
-            if(sortSwitchTab2 == false){
+
+            if(position == 1){
                 sortSwitchTab2 = true;
+                if(reverseSwitchTab2){
+                    collatzViewModel.getCollatzEven().setValue(collatz.getReverseList((ArrayList<BigInteger>) collatz.getSortedEven().clone()));
+                }
+                else {
+                    collatzViewModel.getCollatzEven().setValue(collatz.getSortedEven());
+                }
             }
-            else if(sortSwitchTab2){
-                sortSwitchTab2 = false;
-            }
-        }
-        else if(position == 2){
-            collatzViewModel.getCollatzOdd().setValue(collatz.getListSortedOrReverted((ArrayList<BigInteger>) collatz.getOddList().clone(), sortSwitchTab3, position));
-            if(sortSwitchTab3 == false){
+
+            if(position == 2){
                 sortSwitchTab3 = true;
-            }
-            else if(sortSwitchTab3){
-                sortSwitchTab3 = false;
+                if(reverseSwitchTab3){
+                    collatzViewModel.getCollatzOdd().setValue(collatz.getReverseList((ArrayList<BigInteger>) collatz.getSortedOdd().clone()));
+                }
+                else {
+                    collatzViewModel.getCollatzOdd().setValue(collatz.getSortedOdd());
+                }
             }
         }
+        else if(isChecked == false){
+            if (position == 0){
+                sortSwitchTab1 = false;
+                if(reverseSwitchTab1){
+                    collatzViewModel.getCollatz().setValue(collatz.getReversedIterations());
+                }
+                else{
+                    collatzViewModel.getCollatz().setValue(collatz.getCollatzList());
+                }
+
+            }
+            else if(position == 1){
+                sortSwitchTab2 = false;
+                if(reverseSwitchTab2){
+                    collatzViewModel.getCollatzEven().setValue(collatz.getReversedEven());
+                }
+                else{
+                    collatzViewModel.getCollatzEven().setValue(collatz.getEvenList());
+                }
+
+            }
+            else if(position == 2 ){
+                sortSwitchTab3 = false;
+                if(reverseSwitchTab3){
+                    collatzViewModel.getCollatzOdd().setValue(collatz.getReversedEven());
+                }
+                else {
+                    collatzViewModel.getCollatzOdd().setValue(collatz.getOddList());
+                }
+
+            }
+        }
+
     }
 
     public void fillReversedFragment(int position, CollatzCalculator collatz){
         if(position == 0){
-            collatzViewModel.getCollatz().setValue(collatz.getReverseList(collatz.getCollatzList()));
+            if(sortSwitchTab1 == false){
+                collatzViewModel.getCollatz().setValue(collatz.getReverseList(collatz.getCollatzList()));
+            }
+
         }
         else if(position == 1){
-            collatzViewModel.getCollatzEven().setValue(collatz.getReverseList(collatz.getEvenList()));
+            if(sortSwitchTab2 == false){
+                collatzViewModel.getCollatzEven().setValue(collatz.getReverseList(collatz.getEvenList()));
+            }
+
         }
         else if(position == 2){
-            collatzViewModel.getCollatzOdd().setValue(collatz.getReverseList(collatz.getOddList()));
+            if(sortSwitchTab3 == false){
+                collatzViewModel.getCollatzOdd().setValue(collatz.getReverseList(collatz.getOddList()));
+            }
+
+
         }
     }
 
@@ -241,23 +317,35 @@ public class HomeFragment extends Fragment {
             String numTitle = "Total Iteration";
             numDisplay.setText(iterations);
             numDisplayTitle.setText(numTitle);
-        }
 
+            if(isSorted.isChecked() != sortSwitchTab1){
+                isSorted.toggle();
+            }
+        }
         else if(position == 1 && isChosen){
             String evenTotal = String.valueOf(collatz.getEvenTotal());
             String numTitle = "Total Even";
             numDisplay.setText(evenTotal);
             numDisplayTitle.setText(numTitle);
+            if(isSorted.isChecked() != sortSwitchTab2) {
+                isSorted.toggle();
+            }
         }
         else if(position == 2 && isChosen){
             String oddTotal = String.valueOf(collatz.getOddTotal());
             String numTitle = "Total Odd";
             numDisplay.setText(oddTotal);
             numDisplayTitle.setText(numTitle);
+            if(isSorted.isChecked() != sortSwitchTab3){
+                isSorted.toggle();
+            }
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
 
 
