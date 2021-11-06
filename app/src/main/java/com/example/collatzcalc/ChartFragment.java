@@ -30,7 +30,6 @@ public class ChartFragment extends Fragment {
 
     }
 
-
     public static ChartFragment newInstance() {
         ChartFragment fragment = new ChartFragment();
         Bundle args = new Bundle();
@@ -61,17 +60,12 @@ public class ChartFragment extends Fragment {
         collatzViewModel.getChartItems().observe(getViewLifecycleOwner(),(list)->{
             mAdapter.setList(list);
             mAdapter.notifyDataSetChanged();
-            Log.v("list", "" + list.toString());
+            Log.v("list", "" + list.get(1).getSectionInformation());
 
         });
 
         return chartFragment;
     }
-
-
-
-
-
 
 }
 

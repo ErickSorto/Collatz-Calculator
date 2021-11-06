@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +16,11 @@ public class ChartAdapter extends RecyclerView.Adapter<ChartAdapter.ViewHolder> 
 
     ArrayList<ChartItem> list = new ArrayList<ChartItem>();
 
-
     public ChartAdapter(){}
-
 
     public ChartAdapter(ArrayList<ChartItem> list) {
         this.list = list;
     }
-
 
     @NonNull
     @Override
@@ -33,12 +29,10 @@ public class ChartAdapter extends RecyclerView.Adapter<ChartAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
-
-
     @Override
     public void onBindViewHolder(@NonNull ChartAdapter.ViewHolder holder, int position) {
         holder.chartSectionTitle.setText(list.get(position).getSectionName());
-        holder.chartSectionTitle.setText(list.get(position).getSectionInformation());
+        holder.chartSectionInfo.setText(list.get(position).getSectionInformation());
 
     }
 
