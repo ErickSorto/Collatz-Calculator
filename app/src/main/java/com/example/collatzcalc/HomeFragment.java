@@ -26,6 +26,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private BigInteger collatzNum;
@@ -64,7 +65,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myFragment = inflater.inflate(R.layout.fragment_home, container, false);
-        collatzViewModel = new ViewModelProvider(getActivity()).get(CollatzViewModel.class);
+        collatzViewModel = new ViewModelProvider(requireActivity()).get(CollatzViewModel.class);
 
 
         tabLayout = myFragment.findViewById(R.id.tab_layout);
@@ -139,6 +140,7 @@ public class HomeFragment extends Fragment {
                     reverseSwitchTab1 = false;
                     reverseSwitchTab2 = false;
                     reverseSwitchTab3 = false;
+                    tabloaded4 = false;
                     finishedCal = false;
                     collatz = new CollatzCalculator(new BigInteger(collatzNum.toString()));
 
@@ -156,6 +158,7 @@ public class HomeFragment extends Fragment {
 
 
                     FragmentManager fm = getFragmentManager();
+                    assert fm != null;
                     adapter = new FragmentAdapterRecycler(fm, getLifecycle());
                     pager2.setAdapter(adapter);
 
@@ -170,7 +173,7 @@ public class HomeFragment extends Fragment {
 
                 numDisplay = (TextView) myFragment.findViewById(R.id.numDisplay);
 
-                if (isChosen == true) {
+                if (isChosen) {
                     changeDisplay(position, collatz);
                     fillFragment(position, collatz);
                 }
@@ -217,21 +220,21 @@ public class HomeFragment extends Fragment {
     public void fillFragment(int position, CollatzCalculator collatz) {
 
 
-        if (position == 0 && tabLoaded1 == false) {
+        if (position == 0 && !tabLoaded1) {
             collatzViewModel.getCollatz().setValue(collatz.getCollatzList());
 
             tabLoaded1 = true;
         }
-        else if (position == 1 && tabLoaded2 == false ) {
+        else if (position == 1 && !tabLoaded2) {
 
             collatzViewModel.getCollatzEven().setValue(collatz.getEvenList());
             tabLoaded2 = true;
         }
-        else if (position == 2 && tabLoaded3 == false) {
+        else if (position == 2 && !tabLoaded3) {
             collatzViewModel.getCollatzOdd().setValue(collatz.getOddList());
             tabLoaded3 = true;
         }
-        else if(position == 3 && tabloaded4 == false){
+        else if(position == 3 && !tabloaded4){
             collatzViewModel.getChartItems().setValue(collatz.getChartArray());
             Log.v("IT WENT IN", "ITS HEREEE");
             tabloaded4 = true;
@@ -271,7 +274,7 @@ public class HomeFragment extends Fragment {
                 }
             }
         }
-        else if(isChecked == false){
+        else {
             if (position == 0){
                 sortSwitchTab1 = false;
                 if(reverseSwitchTab1){
@@ -416,6 +419,8 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
+
 
 
 

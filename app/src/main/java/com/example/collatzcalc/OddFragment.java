@@ -63,7 +63,7 @@ public class OddFragment extends Fragment {
 
         collatzViewModel.getCollatzOdd().observe(getViewLifecycleOwner(),(list)->{
             mAdapter.setList(list);
-            mAdapter.notifyDataSetChanged();
+
         });
 
         mRecyclerView.setAdapter(mAdapter);

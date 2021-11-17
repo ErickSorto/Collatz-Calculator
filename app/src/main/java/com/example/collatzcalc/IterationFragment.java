@@ -91,7 +91,7 @@ public class IterationFragment extends Fragment {
         collatzViewModel.getCollatz().observe(getViewLifecycleOwner(),(list)->{
 
             mAdapter.setList(list);
-            mAdapter.notifyDataSetChanged();
+
         });
 
 

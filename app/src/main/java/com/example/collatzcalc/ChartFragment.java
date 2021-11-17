@@ -53,6 +53,7 @@ public class ChartFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) chartFragment.findViewById(R.id.recycler_view_chart);
         mRecyclerView.setHasFixedSize(false);
+
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new ChartAdapter();
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -63,6 +64,8 @@ public class ChartFragment extends Fragment {
             Log.v("list", "" + list.get(1).getSectionInformation());
 
         });
+
+        mRecyclerView.setAdapter(mAdapter);
 
         return chartFragment;
     }

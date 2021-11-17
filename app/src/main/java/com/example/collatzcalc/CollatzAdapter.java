@@ -68,5 +68,6 @@ public class CollatzAdapter extends RecyclerView.Adapter<CollatzAdapter.ViewHold
 
     public void setList(ArrayList<BigInteger> list) {
         this.list = list;
+        this.notifyDataSetChanged();
     }
 }
