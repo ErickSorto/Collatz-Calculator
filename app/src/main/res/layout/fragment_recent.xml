@@ -15,82 +15,17 @@
         android:textStyle="bold"
         android:layout_marginTop="8dp"
         android:maxLines="1"
-        android:text="Collatz Conjecture"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="16dp"
-        android:text="If odd: 3n + 1"
-        android:textSize="10pt"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="16dp"
-        android:text="If even: n/2"
-        android:textSize="10pt"/>
-    <LinearLayout
-        android:layout_marginTop="32dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="">
+        android:text="Recent"/>
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <EditText
-                android:inputType="number"
-                android:id="@+id/input_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="1"
-                android:hint="Enter Number (n)"
-                android:gravity="center"
-                android:layout_marginLeft="8dp"
-                android:tooltipText="hello"
-                />
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/tooltip"
-                android:tooltipText="f(n)={n/2 if n is even \n
-         3n+1 if n is odd"
-                android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
-
-
-
-        <Button
-            android:id="@+id/calculate_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:onClick="calculate"
-            android:text="Compute"
-            android:layout_marginRight="8dp"/>
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/numDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="32sp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recent_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        app:stackFromEnd="true"
+        app:reverseLayout="true"/>
 
 </LinearLayout>

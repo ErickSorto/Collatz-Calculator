@@ -2,7 +2,6 @@ package com.example.collatzcalc;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +24,6 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private BigInteger collatzNum;
@@ -35,17 +32,13 @@ public class HomeFragment extends Fragment {
     boolean tabLoaded1 = false;
     boolean tabLoaded2 = false;
     boolean tabLoaded3 = false;
-    boolean tabloaded4 = false;
+    boolean tabLoaded4 = false;
     boolean sortSwitchTab1 = false;
     boolean sortSwitchTab2 = false;
     boolean sortSwitchTab3 = false;
     boolean reverseSwitchTab1 = false;
     boolean reverseSwitchTab2 = false;
     boolean reverseSwitchTab3 = false;
-    boolean finishedCal = false;
-
-
-
 
     View myFragment;
     TabLayout tabLayout;
@@ -85,11 +78,7 @@ public class HomeFragment extends Fragment {
         isSorted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                 fillSortedFragment(pager2.getCurrentItem(), collatz, isChecked);
-
-
-
             }
         });
 
@@ -103,10 +92,7 @@ public class HomeFragment extends Fragment {
         sort.setOnClickListener(new View.OnClickListener() { //BUG: When new computation is made, all tab loaded are true so when sort button gets click all of pages get updated. WHEN BUTTON IS clicked again calcualtion are made again even if items are loaded
             @Override
             public void onClick(View v) {
-
                 isSorted.toggle();
-
-
             }
         });
 
@@ -120,8 +106,6 @@ public class HomeFragment extends Fragment {
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 numDisplay = (TextView) myFragment.findViewById(R.id.numDisplay);
                 numDisplayTitle = (TextView) myFragment.findViewById(R.id.numDisplayTitle);
                 TextView title = (TextView) myFragment.findViewById(R.id.title_text_view);
@@ -131,31 +115,16 @@ public class HomeFragment extends Fragment {
                     numDisplayTitle.setVisibility(View.GONE);
                     numDisplay.setText("Invalid");
                 } else {
-                    tabLoaded1 = false;
-                    tabLoaded2 = false;
-                    tabLoaded3 = false;
-                    sortSwitchTab1 = false;
-                    sortSwitchTab2 = false;
-                    sortSwitchTab3 = false;
-                    reverseSwitchTab1 = false;
-                    reverseSwitchTab2 = false;
-                    reverseSwitchTab3 = false;
-                    tabloaded4 = false;
-                    finishedCal = false;
+                    resetBooleans();
                     collatz = new CollatzCalculator(new BigInteger(collatzNum.toString()));
-
                     collatz.createCollatzList();
+                    collatzViewModel.addRecent(collatzNum);
 
                     tabLayout.setVisibility(View.VISIBLE);
                     pager2.setVisibility(View.VISIBLE);
 
                     displayButtonTotal.setVisibility(View.VISIBLE);
                     title.setVisibility(View.GONE);
-
-
-
-
-
 
                     FragmentManager fm = getFragmentManager();
                     assert fm != null;
@@ -171,8 +140,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
 
-                numDisplay = (TextView) myFragment.findViewById(R.id.numDisplay);
-
                 if (isChosen) {
                     changeDisplay(position, collatz);
                     fillFragment(position, collatz);
@@ -185,7 +152,6 @@ public class HomeFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
                 pager2.setCurrentItem(tab.getPosition());
             }
 
@@ -198,13 +164,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         return myFragment;
     }
 
     public BigInteger getCollatz() {
 
         EditText inputNum = (EditText) myFragment.findViewById(R.id.input_edit_text);
+
         if (inputNum.getText().toString().equals("") || inputNum.getText().toString().equals("0")) {
             isChosen = false;
             return new BigInteger("0");
@@ -213,20 +179,30 @@ public class HomeFragment extends Fragment {
             isChosen = true;
             return new BigInteger(value);
         }
-
     }
 
+    public void resetBooleans(){
+        tabLoaded1 = false;
+        tabLoaded2 = false;
+        tabLoaded3 = false;
+        tabLoaded4 = false;
+
+        sortSwitchTab1 = false;
+        sortSwitchTab2 = false;
+        sortSwitchTab3 = false;
+
+        reverseSwitchTab1 = false;
+        reverseSwitchTab2 = false;
+        reverseSwitchTab3 = false;
+    }
 
     public void fillFragment(int position, CollatzCalculator collatz) {
 
-
         if (position == 0 && !tabLoaded1) {
             collatzViewModel.getCollatz().setValue(collatz.getCollatzList());
-
             tabLoaded1 = true;
         }
         else if (position == 1 && !tabLoaded2) {
-
             collatzViewModel.getCollatzEven().setValue(collatz.getEvenList());
             tabLoaded2 = true;
         }
@@ -234,15 +210,15 @@ public class HomeFragment extends Fragment {
             collatzViewModel.getCollatzOdd().setValue(collatz.getOddList());
             tabLoaded3 = true;
         }
-        else if(position == 3 && !tabloaded4){
+        else if(position == 3 && !tabLoaded4){
             collatzViewModel.getChartItems().setValue(collatz.getChartArray());
-            Log.v("IT WENT IN", "ITS HEREEE");
-            tabloaded4 = true;
+            tabLoaded4 = true;
         }
 
     }
 
     public void fillSortedFragment(int position, CollatzCalculator collatz, Boolean isChecked){
+
         if(isChecked){
             if(position == 0){
                 sortSwitchTab1 = true;
@@ -303,16 +279,11 @@ public class HomeFragment extends Fragment {
                 else {
                     collatzViewModel.getCollatzOdd().setValue(collatz.getOddList());
                 }
-
             }
         }
-
     }
 
     public void fillReversedFragment(int position, CollatzCalculator collatz, Boolean isChecked){
-
-
-
 
         if(isChecked){
             if(position == 0){
@@ -376,7 +347,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         }
-
     }
 
     public void changeDisplay(int position, CollatzCalculator collatz){
@@ -419,10 +389,6 @@ public class HomeFragment extends Fragment {
             }
         }
     }
-
-
-
-
 
     @Override
     public void onResume() {

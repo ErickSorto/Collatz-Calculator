@@ -60,6 +60,8 @@ private Boolean sortSwitch = false;
         setReversedIterations(getReverseList((ArrayList<BigInteger>) collatzList.clone()));
         setReversedOdd(getReverseList((ArrayList<BigInteger>) oddList.clone()));
 
+
+
     }
 
     public ArrayList<ChartItem> getChartArray(){

@@ -53,8 +53,6 @@
          3n+1 if n is odd" />
         </RelativeLayout>
 
-
-
         <Button
             android:id="@+id/calculate_button"
             android:layout_width="wrap_content"
@@ -198,12 +196,5 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:visibility="gone"/>
-
-
-
-
-
-
-
 
 </LinearLayout>
