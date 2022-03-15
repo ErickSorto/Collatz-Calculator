@@ -3,4 +3,23 @@
     <string name="history_para_one">The Collatz conjecture is a conjecture in mathematics that concerns sequences defined as follows: start with any positive integer n. Then each term is obtained from the previous term as follows: if the previous term is even, the next term is one half of the previous term. If the previous term is odd, the next term is 3 times the previous term plus 1. The conjecture is that no matter what value of n, the sequence will always reach 1.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="max">Max:</string>
+    <string name="sample_max">8923447</string>
+    <string name="collatz_history">Collatz History</string>
+    <string name="history_para_2">The conjecture is named after Lothar Collatz, who introduced the idea in 1937, two years after receiving his doctorate.[1] It is also known as the 3n + 1 problem, the 3n + 1 conjecture, the Ulam conjecture (after Stanisław Ulam), Kakutani\'s problem (after Shizuo Kakutani), the Thwaites conjecture (after Sir Bryan Thwaites), Hasse\'s algorithm (after Helmut Hasse), or the Syracuse problem.[2][4] The sequence of numbers involved is sometimes referred to as the hailstone sequence or hailstone numbers (because the values are usually subject to multiple descents and ascents like hailstones in a cloud),[5][6] or as wondrous numbers.[7]</string>
+    <string name="history_para_3">Paul Erdős said about the Collatz conjecture: Mathematics may not be ready for such problems. He also offered US$500 for its solution.[9] Jeffrey Lagarias stated in 2010 that the Collatz conjecture is an extraordinarily difficult problem, completely out of reach of present day mathematics.</string>
+    <string name="collatz_conjecture">Collatz Conjecture</string>
+    <string name="enter_number_prompt">Enter Number (n)</string>
+    <string name="compute">Compute</string>
+    <string name="reverse">Reverse</string>
+    <string name="total_iteration">Total Iteration</string>
+    <string name="number_display">23423</string>
+    <string name="sort">Sort</string>
+    <string name="iteration">Iteration</string>
+    <string name="even">Even</string>
+    <string name="odd">Odd</string>
+    <string name="chart">Chart</string>
+    <string name="recent_title">Recent</string>
+    <string name="number_list">434:</string>
+    <string name="iteration_number">4234342342394872389478923748923789472893748923748972389478923748923748978234723</string>
 </resources>

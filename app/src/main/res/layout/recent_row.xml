@@ -6,14 +6,24 @@
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     app:cardCornerRadius="3dp"
+    android:clickable="false"
+    android:focusable="false"
+    android:isScrollContainer="true"
+    app:cardUseCompatPadding="true"
+   >
 
-    app:cardUseCompatPadding="true">
     <HorizontalScrollView
+        android:id="@+id/scroll_view_recent"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="false">
 
         <TextView
+            android:clickable="false"
+            android:focusable="false"
             android:id="@+id/recent_num_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,9 +32,10 @@
             android:layout_marginBottom="4dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
             android:scrollbars="horizontal"
-            android:textSize="32sp"/>
+            android:textSize="32sp"
+            />
 
     </HorizontalScrollView>
 

@@ -14,15 +14,11 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 public class ChartFragment extends Fragment {
     CollatzViewModel collatzViewModel;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private ChartAdapter mAdapter;
-
-
-
     private View chartFragment;
 
     public ChartFragment() {
@@ -61,7 +57,6 @@ public class ChartFragment extends Fragment {
         collatzViewModel.getChartItems().observe(getViewLifecycleOwner(),(list)->{
             mAdapter.setList(list);
             mAdapter.notifyDataSetChanged();
-            Log.v("list", "" + list.get(1).getSectionInformation());
 
         });
 
@@ -69,6 +64,4 @@ public class ChartFragment extends Fragment {
 
         return chartFragment;
     }
-
 }
-

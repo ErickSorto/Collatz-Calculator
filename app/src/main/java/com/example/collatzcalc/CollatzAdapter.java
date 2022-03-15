@@ -30,7 +30,6 @@ public class CollatzAdapter extends RecyclerView.Adapter<CollatzAdapter.ViewHold
         this.list = list;
     }
 
-
     @NonNull
     @Override
     public CollatzAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

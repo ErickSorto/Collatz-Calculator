@@ -1,8 +1,10 @@
 package com.example.collatzcalc;
 
+import android.util.Log;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.math.BigInteger;
 
 public class CollatzCalculator {
 private BigInteger numEntered;
@@ -18,39 +20,42 @@ private ArrayList<BigInteger> sortedOdd = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> reversedIterations = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> reversedEven = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> reversedOdd = new ArrayList<BigInteger>();
-
+private BigInteger divisor = new BigInteger("2");
+private BigInteger oneBigInt = new BigInteger("1");
+private BigInteger threeBigInt = new BigInteger("3");
 private Boolean sortSwitch = false;
 
-
     public CollatzCalculator(BigInteger numEntered) {
-
         this.numEntered = numEntered;
-
     }
 
     private boolean isOdd(BigInteger val){
-        return !val.mod(new BigInteger("2")).equals(BigInteger.ZERO);
+        return val.testBit(0);
     }
-
-
-
 
     public void createCollatzList(){
         BigInteger originalNum = numEntered;
         collatzList.add(numEntered);
+        long startTime = System.nanoTime();
+
         while (!numEntered.equals(new BigInteger("1"))) {
 
             if (isOdd(numEntered)) {
                 oddList.add(numEntered);
-                numEntered = numEntered.multiply(new BigInteger("3")).add(new BigInteger("1"));
+                numEntered = numEntered.multiply(threeBigInt).add(oneBigInt);
 
             } else {
                 evenList.add(numEntered);
-                numEntered = numEntered.divide(new BigInteger("2"));
+                numEntered = numEntered.shiftRight(1);
             }
             collatzList.add(numEntered);
         }
-        oddList.add(new BigInteger("1"));
+        long stopTime = System.nanoTime();
+        long elapsedTime = stopTime - startTime;
+        double elapsedTimeInSecond = (double) elapsedTime / 1_000_000_000;
+        Log.v("HEREEE", "it took "+ (elapsedTimeInSecond) + " seconds");
+
+        oddList.add(oneBigInt);
         oddList.remove(originalNum);
         evenList.remove(originalNum);
         setSortedIterations(sortList((ArrayList<BigInteger>) collatzList.clone()));
@@ -59,9 +64,6 @@ private Boolean sortSwitch = false;
         setReversedEven(getReverseList((ArrayList<BigInteger>) evenList.clone()));
         setReversedIterations(getReverseList((ArrayList<BigInteger>) collatzList.clone()));
         setReversedOdd(getReverseList((ArrayList<BigInteger>) oddList.clone()));
-
-
-
     }
 
     public ArrayList<ChartItem> getChartArray(){
@@ -88,9 +90,7 @@ private Boolean sortSwitch = false;
     }
 
     public BigInteger getMax(){
-
         maximum = Collections.max(getCollatzList());
-
         return maximum;
     }
     public double getResidue(){
@@ -118,19 +118,6 @@ private Boolean sortSwitch = false;
     public ArrayList<BigInteger> sortList(ArrayList<BigInteger> listToBeSorted){
         Collections.sort(listToBeSorted);
         return listToBeSorted;
-    }
-
-
-
-
-
-
-    public BigInteger getNumEntered() {
-        return numEntered;
-    }
-
-    public void setNumEntered(BigInteger numEntered) {
-        this.numEntered = numEntered;
     }
 
     public ArrayList<BigInteger> getSortedIterations() {

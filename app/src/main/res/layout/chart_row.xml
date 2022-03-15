@@ -9,14 +9,14 @@
     <TextView
         android:id="@+id/chart_section_title"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:text="Max:"
+        android:layout_marginStart="8dp"
+        android:text="@string/max"
         android:textSize="18sp"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/chart_section_info"
         android:layout_width="wrap_content"
-        android:text="8923447"
+        android:text="@string/sample_max"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:textSize="16sp"

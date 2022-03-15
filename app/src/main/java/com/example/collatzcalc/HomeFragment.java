@@ -28,6 +28,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
     private BigInteger collatzNum;
     private CollatzCalculator collatz;
+
     boolean isChosen = false;
     boolean tabLoaded1 = false;
     boolean tabLoaded2 = false;
@@ -49,7 +50,7 @@ public class HomeFragment extends Fragment {
     private TextView numDisplayTitle;
     private SwitchCompat isSorted;
     private SwitchCompat isRevered;
-
+    private EditText inputNum;
     private Handler homeHandler = new Handler();
 
     CollatzViewModel collatzViewModel;
@@ -59,8 +60,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myFragment = inflater.inflate(R.layout.fragment_home, container, false);
         collatzViewModel = new ViewModelProvider(requireActivity()).get(CollatzViewModel.class);
-
-
+        inputNum = (EditText) myFragment.findViewById(R.id.input_edit_text);
         tabLayout = myFragment.findViewById(R.id.tab_layout);
         pager2 = myFragment.findViewById(R.id.view_pager2);
         isSorted = myFragment.findViewById(R.id.switch_sort);
@@ -164,12 +164,18 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        if(!collatzViewModel.getRecentNumClicked().equals(BigInteger.ZERO)){
+            String num = collatzViewModel.getRecentNumClicked().toString();
+            collatzNum = new BigInteger(num);
+            inputNum.setText(num);
+            collatzViewModel.setRecentNumClicked(BigInteger.ZERO);
+            calculate.performClick();
+        }
+
         return myFragment;
     }
 
     public BigInteger getCollatz() {
-
-        EditText inputNum = (EditText) myFragment.findViewById(R.id.input_edit_text);
 
         if (inputNum.getText().toString().equals("") || inputNum.getText().toString().equals("0")) {
             isChosen = false;

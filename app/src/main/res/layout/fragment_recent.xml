@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:focusable="false">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +16,9 @@
         android:textStyle="bold"
         android:layout_marginTop="8dp"
         android:maxLines="1"
-        android:text="Recent"/>
+        android:focusable="false"
+        android:clickable="false"
+        android:text="@string/recent_title"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

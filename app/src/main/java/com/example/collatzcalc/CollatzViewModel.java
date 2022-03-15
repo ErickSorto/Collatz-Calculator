@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModel;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.function.BiFunction;
 
 public class CollatzViewModel extends ViewModel {
     private MutableLiveData<ArrayList<BigInteger>> collatz = new MutableLiveData();
     private MutableLiveData<ArrayList<BigInteger>> collatzEven = new MutableLiveData();
     private MutableLiveData<ArrayList<BigInteger>> collatzOdd = new MutableLiveData();
     private MutableLiveData<ArrayList<ChartItem>> chartItems = new MutableLiveData();
+    private BigInteger recentNumClicked = BigInteger.ZERO;
     private ArrayList<BigInteger> recentNumList = new ArrayList<BigInteger>();
 
     public MutableLiveData<ArrayList<BigInteger>> getCollatz(){
@@ -27,10 +27,17 @@ public class CollatzViewModel extends ViewModel {
     public MutableLiveData<ArrayList<ChartItem>> getChartItems(){
         return chartItems;
     }
+
     public ArrayList<BigInteger> getRecentNumList(){
-
-
         return recentNumList;
+    }
+
+    public BigInteger getRecentNumClicked() {
+        return recentNumClicked;
+    }
+
+    public void setRecentNumClicked(BigInteger recentNumClicked) {
+        this.recentNumClicked = recentNumClicked;
     }
 
     public void addRecent(BigInteger recentNum){

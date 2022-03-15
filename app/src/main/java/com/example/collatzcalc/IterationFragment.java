@@ -35,8 +35,6 @@ public class IterationFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private CollatzAdapter mAdapter;
 
-
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -93,7 +91,6 @@ public class IterationFragment extends Fragment {
             mAdapter.setList(list);
 
         });
-
 
         return iterationFragment;
     }

@@ -1,6 +1,5 @@
 package com.example.collatzcalc;
 
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,21 +24,16 @@ import java.util.ArrayList;
  */
 public class EvenFragment extends Fragment {
 
-
     CollatzViewModel collatzViewModel;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private CollatzAdapter mAdapter;
-
-
-
     private View evenFragment;
 
     public EvenFragment() {
         // Required empty public constructor
 
     }
-
 
     public static EvenFragment newInstance() {
         EvenFragment fragment = new EvenFragment();
@@ -68,17 +62,11 @@ public class EvenFragment extends Fragment {
         mAdapter = new CollatzAdapter();
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-
         collatzViewModel.getCollatzEven().observe(getViewLifecycleOwner(),(list)->{
             mAdapter.setList(list);
-
-
         });
 
         mRecyclerView.setAdapter(mAdapter);
         return evenFragment;
     }
-
-
-
 }

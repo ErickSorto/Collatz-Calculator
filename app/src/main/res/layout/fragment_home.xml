@@ -12,19 +12,18 @@
         android:id="@+id/title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="18pt"
-        android:textStyle="bold"
         android:layout_marginTop="8dp"
+        android:gravity="center"
         android:maxLines="1"
-        android:text="Collatz Conjecture"/>
+        android:text="@string/collatz_conjecture"
+        android:textSize="18pt"
+        android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="">
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -35,14 +34,14 @@
                 android:id="@+id/input_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
-                android:layout_weight="1"
                 android:gravity="center"
-                android:hint="Enter Number (n)"
+                android:hint="@string/enter_number_prompt"
                 android:inputType="number"
                 android:minHeight="48dp"
-                android:tooltipText="hello" />
+                android:tooltipText="hello"
+                tools:targetApi="o" />
 
             <ImageView
                 android:layout_width="30dp"
@@ -50,36 +49,33 @@
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/tooltip"
                 android:tooltipText="f(n)={n/2 if n is even \n
-         3n+1 if n is odd" />
+         3n+1 if n is odd"
+                tools:targetApi="o" />
         </RelativeLayout>
 
         <Button
             android:id="@+id/calculate_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Compute"
-            android:textColor="@color/white"
+            android:text="@string/compute"
 
-            android:layout_marginRight="8dp"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 
-
-
-
-
     <RelativeLayout
+        android:id="@+id/display_button_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/display_button_layout"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:orientation="vertical">
 
             <ImageButton
@@ -90,14 +86,15 @@
                 android:backgroundTint="@color/black"
                 android:src="@drawable/ic_baseline_swap_vert_24"
 
-                android:tooltipText="Flip List" />
+                android:tooltipText="Flip List"
+                tools:targetApi="o" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_reverse"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:text="Reverse" />
+                android:text="@string/reverse" />
         </LinearLayout>
 
 
@@ -114,7 +111,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Total Iteration"
+                android:text="@string/total_iteration"
                 android:textSize="16sp"
 
                 />
@@ -127,16 +124,16 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="23423"
+                android:text="@string/number_display"
                 android:textSize="32sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical">
 
             <ImageButton
@@ -146,18 +143,17 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
                 android:src="@drawable/ic_baseline_sort_24"
-                android:tooltipText="Sort List" />
+                android:tooltipText="Sort List"
+                tools:targetApi="o" />
 
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_sort"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:layout_centerHorizontal="@+id/sort_image_button"
-                android:text="Sort" />
+                android:layout_gravity="center"
+                android:text="@string/sort" />
         </LinearLayout>
-
 
 
     </RelativeLayout>
@@ -167,27 +163,28 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="#59000000"
-        android:visibility="visible">
+        android:visibility="gone"
+        app:tabIndicatorColor="#59000000">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Iteration" />
+            android:text="@string/iteration" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Even" />
+            android:text="@string/even" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Odd" />
+            android:text="@string/odd" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chart" />
+            android:text="@string/chart" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -195,6 +192,6 @@
         android:id="@+id/view_pager2"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

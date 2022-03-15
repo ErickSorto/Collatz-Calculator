@@ -14,9 +14,6 @@ import java.math.BigInteger;
 
 public class FragmentAdapterRecycler extends FragmentStateAdapter {
 
-
-
-
     public FragmentAdapterRecycler(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
 

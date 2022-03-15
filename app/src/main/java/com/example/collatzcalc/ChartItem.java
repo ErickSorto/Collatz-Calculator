@@ -9,7 +9,6 @@ public class ChartItem {
         this.sectionInformation = sectionInformation;
     }
 
-
     public String getSectionName() {
         return sectionName;
     }
