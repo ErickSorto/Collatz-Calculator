@@ -18,31 +18,38 @@
             android:gravity="center"
             android:maxLines="1"
             android:text="@string/collatz_history"
-            android:textSize="18pt"
+            android:textSize="40sp"
             android:textStyle="bold" />
 
         <TextView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:text="@string/history_para_one" />
+            android:text="@string/history_para_one"
+            android:textSize="14sp"
+            android:fontFamily="@font/noto_sans"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
+            android:textSize="14sp"
             android:layout_marginRight="8dp"
-            android:text="@string/history_para_2" />
+            android:text="@string/history_para_2"
+            android:fontFamily="@font/noto_sans"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
+            android:textSize="14sp"
             android:layout_marginRight="8dp"
-            android:text="@string/history_para_3" />
+            android:text="@string/history_para_3"
+            android:fontFamily="@font/noto_sans"/>
 
     </LinearLayout>
 </ScrollView>

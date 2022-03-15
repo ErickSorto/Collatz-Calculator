@@ -19,11 +19,14 @@
         android:layout_alignParentBottom="true"
         android:background="?android:windowBackground"
 
-        app:menu="@menu/bottom_navigation">
+        app:menu="@menu/bottom_navigation"
+        >
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#23000000"/>
+            android:background="#23000000"
+            />
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 

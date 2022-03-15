@@ -16,7 +16,7 @@
         android:gravity="center"
         android:maxLines="1"
         android:text="@string/collatz_conjecture"
-        android:textSize="18pt"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -164,7 +164,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:tabIndicatorColor="#59000000">
+        app:tabSelectedTextColor="@color/material_on_background_emphasis_high_type"
+        app:tabIndicatorColor="#7AFFFFFF">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
