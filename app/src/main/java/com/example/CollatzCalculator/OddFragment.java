@@ -1,44 +1,33 @@
-package com.example.collatzcalc;
+package com.example.CollatzCalculator;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EvenFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class EvenFragment extends Fragment {
-
+public class OddFragment extends Fragment {
     CollatzViewModel collatzViewModel;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private CollatzAdapter mAdapter;
-    private View evenFragment;
 
-    public EvenFragment() {
-        // Required empty public constructor
 
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+    private View oddFragment;
+
+    public OddFragment() {
     }
 
-    public static EvenFragment newInstance() {
-        EvenFragment fragment = new EvenFragment();
-        Bundle args = new Bundle();
 
+    public static OddFragment newInstance() {
+        OddFragment fragment = new OddFragment();
+        Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,21 +41,26 @@ public class EvenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        evenFragment = inflater.inflate(R.layout.fragment_even, container, false);
+
+
+        oddFragment = inflater.inflate(R.layout.fragment_odd, container, false);
         collatzViewModel = new ViewModelProvider(getActivity()).get(CollatzViewModel.class);
 
-        mRecyclerView = (RecyclerView) evenFragment.findViewById(R.id.recycler_view_even);
+        mRecyclerView = (RecyclerView) oddFragment.findViewById(R.id.recycler_view_odd);
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new CollatzAdapter();
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        collatzViewModel.getCollatzEven().observe(getViewLifecycleOwner(),(list)->{
+
+        collatzViewModel.getCollatzOdd().observe(getViewLifecycleOwner(),(list)->{
             mAdapter.setList(list);
+
         });
 
         mRecyclerView.setAdapter(mAdapter);
-        return evenFragment;
+        return oddFragment;
     }
+
+
 }

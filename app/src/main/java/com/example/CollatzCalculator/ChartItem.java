@@ -1,4 +1,4 @@
-package com.example.collatzcalc;
+package com.example.CollatzCalculator;
 
 public class ChartItem {
     private String sectionName;

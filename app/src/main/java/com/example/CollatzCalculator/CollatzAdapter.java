@@ -1,4 +1,4 @@
-package com.example.collatzcalc;
+package com.example.CollatzCalculator;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.tabs.TabLayout;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

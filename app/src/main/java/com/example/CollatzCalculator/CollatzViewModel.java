@@ -1,11 +1,10 @@
-package com.example.collatzcalc;
+package com.example.CollatzCalculator;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.function.BiFunction;
 
 public class CollatzViewModel extends ViewModel {
     private MutableLiveData<ArrayList<BigInteger>> collatz = new MutableLiveData();

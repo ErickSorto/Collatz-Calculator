@@ -1,4 +1,4 @@
-package com.example.collatzcalc;
+package com.example.CollatzCalculator;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.collatzcalc.R;
+import com.example.CollatzCalculator.R;
 
 public class HistoryFragment extends Fragment {
 

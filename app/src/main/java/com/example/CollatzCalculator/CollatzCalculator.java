@@ -1,10 +1,9 @@
-package com.example.collatzcalc;
+package com.example.CollatzCalculator;
 
 import android.util.Log;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.math.BigInteger;
 
 public class CollatzCalculator {
 private BigInteger numEntered;

@@ -1,4 +1,4 @@
-package com.example.collatzcalc;
+package com.example.CollatzCalculator;
 
 import org.junit.Test;
 

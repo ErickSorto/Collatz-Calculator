@@ -1,4 +1,4 @@
-package com.example.collatzcalc;
+package com.example.CollatzCalculator;
 
 import android.os.Bundle;
 import android.os.Handler;

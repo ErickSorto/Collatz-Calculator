@@ -1,16 +1,10 @@
-package com.example.collatzcalc;
-
-import android.view.View;
+package com.example.CollatzCalculator;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-
-import java.math.BigInteger;
 
 public class FragmentAdapterRecycler extends FragmentStateAdapter {
 
