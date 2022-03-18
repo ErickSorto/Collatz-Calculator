@@ -19,10 +19,8 @@ private ArrayList<BigInteger> sortedOdd = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> reversedIterations = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> reversedEven = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> reversedOdd = new ArrayList<BigInteger>();
-private BigInteger divisor = new BigInteger("2");
 private BigInteger oneBigInt = new BigInteger("1");
 private BigInteger threeBigInt = new BigInteger("3");
-private Boolean sortSwitch = false;
 
     public CollatzCalculator(BigInteger numEntered) {
         this.numEntered = numEntered;
@@ -37,10 +35,10 @@ private Boolean sortSwitch = false;
         collatzList.add(numEntered);
         long startTime = System.nanoTime();
 
-        while (!numEntered.equals(new BigInteger("1"))) {
+        while (numEntered.bitLength() > 1) {
 
             if (isOdd(numEntered)) {
-                oddList.add(numEntered);
+               oddList.add(numEntered);
                 numEntered = numEntered.multiply(threeBigInt).add(oneBigInt);
 
             } else {
@@ -57,12 +55,7 @@ private Boolean sortSwitch = false;
         oddList.add(oneBigInt);
         oddList.remove(originalNum);
         evenList.remove(originalNum);
-        setSortedIterations(sortList((ArrayList<BigInteger>) collatzList.clone()));
-        setSortedEven(sortList((ArrayList<BigInteger>) evenList.clone()));
-        setSortedOdd(sortList((ArrayList<BigInteger>) oddList.clone()));
-        setReversedEven(getReverseList((ArrayList<BigInteger>) evenList.clone()));
-        setReversedIterations(getReverseList((ArrayList<BigInteger>) collatzList.clone()));
-        setReversedOdd(getReverseList((ArrayList<BigInteger>) oddList.clone()));
+
     }
 
     public ArrayList<ChartItem> getChartArray(){
@@ -93,12 +86,11 @@ private Boolean sortSwitch = false;
         return maximum;
     }
     public double getResidue(){
-        return (Math.pow(2,getEvenTotal()))/ (Math.pow(3,getOddTotal()) * getIterationTotal());
+        return (Math.pow(2,getEvenTotal()))/ (Math.pow(3,getOddTotal()) * (1 / getIterationTotal()));
     }
 
     public int getIterationTotal() {
-        int iterationTotal = 0;
-        return iterationTotal = collatzList.size() - 1;
+        return collatzList.size() - 1;
     }
 
     public int getEvenTotal(){
@@ -120,50 +112,38 @@ private Boolean sortSwitch = false;
     }
 
     public ArrayList<BigInteger> getSortedIterations() {
-        return sortedIterations;
+        return sortList((ArrayList<BigInteger>) collatzList.clone());
     }
 
-    public void setSortedIterations(ArrayList<BigInteger> sortedIterations) {
-        this.sortedIterations = sortedIterations;
-    }
 
     public ArrayList<BigInteger> getSortedEven() {
-        return sortedEven;
+        return sortList((ArrayList<BigInteger>) evenList.clone());
     }
 
-    public void setSortedEven(ArrayList<BigInteger> sortedEven) {
-        this.sortedEven = sortedEven;
-    }
+
 
     public ArrayList<BigInteger> getSortedOdd() {
-        return sortedOdd;
+        return sortList((ArrayList<BigInteger>) oddList.clone());
     }
 
-    public void setSortedOdd(ArrayList<BigInteger> sortedOdd) {
-        this.sortedOdd = sortedOdd;
-    }
+
 
     public ArrayList<BigInteger> getReversedIterations() {
-        return reversedIterations;
+        return getReverseList((ArrayList<BigInteger>) collatzList.clone());
     }
 
-    public void setReversedIterations(ArrayList<BigInteger> reversedIterations) {
-        this.reversedIterations = reversedIterations;
-    }
 
     public ArrayList<BigInteger> getReversedEven() {
-        return reversedEven;
+        return getReverseList((ArrayList<BigInteger>) evenList.clone());
     }
 
-    public void setReversedEven(ArrayList<BigInteger> reversedEven) {
-        this.reversedEven = reversedEven;
-    }
+
 
     public ArrayList<BigInteger> getReversedOdd() {
-        return reversedOdd;
+        return getReverseList((ArrayList<BigInteger>) oddList.clone());
     }
 
-    public void setReversedOdd(ArrayList<BigInteger> reversedOdd) {
-        this.reversedOdd = reversedOdd;
-    }
+
+
+
 }
