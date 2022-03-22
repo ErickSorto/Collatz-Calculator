@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,13 +69,21 @@ public class HomeFragment extends Fragment {
         isRevered = myFragment.findViewById(R.id.switch_reverse);
 
         Button calculate = myFragment.findViewById(R.id.calculate_button);
-        ImageButton flip = myFragment.findViewById(R.id.flip_image_button);
+        ImageButton flip = myFragment.findViewById(R.id.reverse_image_button);
         ImageButton sort = myFragment.findViewById(R.id.sort_image_button);
+        ImageView tip = myFragment.findViewById(R.id.search_tool_tip);
         RelativeLayout displayButtonTotal = myFragment.findViewById(R.id.display_button_layout);
 
         FragmentManager fm = getFragmentManager();
         adapter = new FragmentAdapterRecycler(fm, getLifecycle());
         pager2.setAdapter(adapter);
+
+        tip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tip.performLongClick();
+            }
+        });
 
         isSorted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -119,6 +129,7 @@ public class HomeFragment extends Fragment {
                     collatz = new CollatzCalculator(new BigInteger(collatzNum.toString()));
                     collatz.createCollatzList();
                     collatzViewModel.addRecent(collatzNum);
+                    Toast.makeText(myFragment.getContext(),"Calculation time: " +  String.format("%.3f", collatz.getIterationTime()) + " seconds",Toast.LENGTH_LONG).show();
 
                     tabLayout.setVisibility(View.VISIBLE);
                     pager2.setVisibility(View.VISIBLE);
@@ -186,6 +197,8 @@ public class HomeFragment extends Fragment {
             return new BigInteger(value);
         }
     }
+
+
 
     public void resetBooleans(){
         tabLoaded1 = false;

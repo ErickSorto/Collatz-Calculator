@@ -44,12 +44,14 @@
                 tools:targetApi="o" />
 
             <ImageView
+                android:id="@+id/search_tool_tip"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/tooltip"
                 android:tooltipText="f(n)={n/2 if n is even \n
          3n+1 if n is odd"
+
                 tools:targetApi="o" />
         </RelativeLayout>
 
@@ -79,14 +81,14 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/flip_image_button"
+                android:id="@+id/reverse_image_button"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
                 android:src="@drawable/ic_baseline_swap_vert_24"
 
-                android:tooltipText="Flip List"
+                android:tooltipText="Reverse the List"
                 tools:targetApi="o" />
 
             <androidx.appcompat.widget.SwitchCompat
@@ -143,7 +145,7 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
                 android:src="@drawable/ic_baseline_sort_24"
-                android:tooltipText="Sort List"
+                android:tooltipText="Sort the List \n Least to Greatest"
                 tools:targetApi="o" />
 
 

@@ -1,6 +1,9 @@
 package com.example.CollatzCalculator;
 
+import android.app.Activity;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +12,7 @@ public class CollatzCalculator {
 private BigInteger numEntered;
 private BigInteger maximum;
 private double residue;
+private double elapsedTimeInSecond;
 
 private ArrayList<BigInteger> collatzList = new ArrayList<BigInteger>();
 private ArrayList<BigInteger> evenList = new ArrayList<BigInteger>();
@@ -38,7 +42,7 @@ private BigInteger threeBigInt = new BigInteger("3");
         while (numEntered.bitLength() > 1) {
 
             if (isOdd(numEntered)) {
-               oddList.add(numEntered);
+                oddList.add(numEntered);
                 numEntered = numEntered.multiply(threeBigInt).add(oneBigInt);
 
             } else {
@@ -49,8 +53,9 @@ private BigInteger threeBigInt = new BigInteger("3");
         }
         long stopTime = System.nanoTime();
         long elapsedTime = stopTime - startTime;
-        double elapsedTimeInSecond = (double) elapsedTime / 1_000_000_000;
-        Log.v("HEREEE", "it took "+ (elapsedTimeInSecond) + " seconds");
+
+        elapsedTimeInSecond = (double) elapsedTime / 1_000_000_000;
+
 
         oddList.add(oneBigInt);
         oddList.remove(originalNum);
@@ -64,8 +69,8 @@ private BigInteger threeBigInt = new BigInteger("3");
         arrayChart.add(new ChartItem("Total Iteration: ", String.valueOf(getIterationTotal())));
         arrayChart.add(new ChartItem("Total Even: ", String.valueOf(getEvenTotal())));
         arrayChart.add(new ChartItem("Total Odd: ", String.valueOf(getOddTotal())));
-        arrayChart.add(new ChartItem("Maximum: ", String.valueOf(getMax())));
         arrayChart.add(new ChartItem("Residue: ", String.valueOf(getResidue())));
+        arrayChart.add(new ChartItem("Maximum: ", String.valueOf(getMax())));
         return arrayChart;
     }
 
@@ -112,18 +117,28 @@ private BigInteger threeBigInt = new BigInteger("3");
     }
 
     public ArrayList<BigInteger> getSortedIterations() {
-        return sortList((ArrayList<BigInteger>) collatzList.clone());
+        if (sortedIterations.isEmpty()){
+            sortedIterations = sortList((ArrayList<BigInteger>) collatzList.clone());
+        }
+
+        return sortedIterations;
     }
 
 
     public ArrayList<BigInteger> getSortedEven() {
-        return sortList((ArrayList<BigInteger>) evenList.clone());
+        if (sortedEven.isEmpty()){
+            sortedEven = sortList((ArrayList<BigInteger>) evenList.clone());
+        }
+        return sortedEven;
     }
 
 
 
     public ArrayList<BigInteger> getSortedOdd() {
-        return sortList((ArrayList<BigInteger>) oddList.clone());
+        if(sortedOdd.isEmpty()){
+           sortedOdd = sortList((ArrayList<BigInteger>) oddList.clone());
+        }
+        return sortedOdd;
     }
 
 
@@ -141,6 +156,10 @@ private BigInteger threeBigInt = new BigInteger("3");
 
     public ArrayList<BigInteger> getReversedOdd() {
         return getReverseList((ArrayList<BigInteger>) oddList.clone());
+    }
+
+    public Double getIterationTime(){
+        return elapsedTimeInSecond;
     }
 
 
