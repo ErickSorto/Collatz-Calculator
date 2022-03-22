@@ -69,9 +69,28 @@ private BigInteger threeBigInt = new BigInteger("3");
         arrayChart.add(new ChartItem("Total Iteration: ", String.valueOf(getIterationTotal())));
         arrayChart.add(new ChartItem("Total Even: ", String.valueOf(getEvenTotal())));
         arrayChart.add(new ChartItem("Total Odd: ", String.valueOf(getOddTotal())));
+        arrayChart.add(new ChartItem("Even Percentage: ", getEvenPercentage()));
+        arrayChart.add(new ChartItem("Odd Percentage: ", getOddPercentage()));
+        arrayChart.add(new ChartItem("Calculation time: ", String.format("%.3f", getIterationTime()) + " seconds"));
         arrayChart.add(new ChartItem("Residue: ", String.valueOf(getResidue())));
         arrayChart.add(new ChartItem("Maximum: ", String.valueOf(getMax())));
         return arrayChart;
+    }
+
+    public String getEvenPercentage(){
+        double percent = ((double) getEvenTotal())/ ((double) getIterationTotal()) * 100;
+        String formattedPercent = String.format("%.2f", percent);
+        String percentage = formattedPercent + "%";
+
+        return percentage;
+    }
+
+    public String getOddPercentage(){
+        double percent = ((double) getOddTotal())/ ((double) getIterationTotal()) * 100;
+        String formattedPercent = String.format("%.2f", percent);
+        String percentage = formattedPercent + "%";
+
+        return percentage;
     }
 
     public ArrayList<BigInteger> getCollatzList() {
@@ -90,6 +109,7 @@ private BigInteger threeBigInt = new BigInteger("3");
         maximum = Collections.max(getCollatzList());
         return maximum;
     }
+
     public double getResidue(){
         return (Math.pow(2,getEvenTotal()))/ (Math.pow(3,getOddTotal()) * (1 / getIterationTotal()));
     }
@@ -124,15 +144,12 @@ private BigInteger threeBigInt = new BigInteger("3");
         return sortedIterations;
     }
 
-
     public ArrayList<BigInteger> getSortedEven() {
         if (sortedEven.isEmpty()){
             sortedEven = sortList((ArrayList<BigInteger>) evenList.clone());
         }
         return sortedEven;
     }
-
-
 
     public ArrayList<BigInteger> getSortedOdd() {
         if(sortedOdd.isEmpty()){
@@ -141,18 +158,13 @@ private BigInteger threeBigInt = new BigInteger("3");
         return sortedOdd;
     }
 
-
-
     public ArrayList<BigInteger> getReversedIterations() {
         return getReverseList((ArrayList<BigInteger>) collatzList.clone());
     }
 
-
     public ArrayList<BigInteger> getReversedEven() {
         return getReverseList((ArrayList<BigInteger>) evenList.clone());
     }
-
-
 
     public ArrayList<BigInteger> getReversedOdd() {
         return getReverseList((ArrayList<BigInteger>) oddList.clone());
@@ -161,8 +173,5 @@ private BigInteger threeBigInt = new BigInteger("3");
     public Double getIterationTime(){
         return elapsedTimeInSecond;
     }
-
-
-
 
 }

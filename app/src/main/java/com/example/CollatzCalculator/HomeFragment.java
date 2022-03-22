@@ -129,7 +129,12 @@ public class HomeFragment extends Fragment {
                     collatz = new CollatzCalculator(new BigInteger(collatzNum.toString()));
                     collatz.createCollatzList();
                     collatzViewModel.addRecent(collatzNum);
-                    Toast.makeText(myFragment.getContext(),"Calculation time: " +  String.format("%.3f", collatz.getIterationTime()) + " seconds",Toast.LENGTH_LONG).show();
+                    Toast toastMessage = null;
+                    if (toastMessage!= null) {
+                        toastMessage.cancel();
+                    }
+                    toastMessage = Toast.makeText(myFragment.getContext(),"Calculation time: " +  String.format("%.3f", collatz.getIterationTime()) + " seconds",Toast.LENGTH_LONG);
+                    toastMessage.show();
 
                     tabLayout.setVisibility(View.VISIBLE);
                     pager2.setVisibility(View.VISIBLE);
@@ -197,8 +202,6 @@ public class HomeFragment extends Fragment {
             return new BigInteger(value);
         }
     }
-
-
 
     public void resetBooleans(){
         tabLoaded1 = false;
@@ -414,5 +417,3 @@ public class HomeFragment extends Fragment {
         super.onResume();
     }
 }
-
-
